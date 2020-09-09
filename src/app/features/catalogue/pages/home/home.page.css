@@ -1,0 +1,44 @@
+#main{
+    display: flex;
+    flex-direction: column;
+    padding-bottom: 40px;
+    margin: 40px;
+    justify-content: center;
+}
+
+#cards{
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    align-self: center;
+    padding: 20px;
+    margin: 40px;
+}
+
+#titre{
+    font: bold;
+    color: black;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Verdana, sans-serif;
+    text-shadow: bisque;
+    text-align: center;
+}
+
+#text{
+    text-align: center;
+}
+
+#card{
+    padding : 10px;
+    margin: 20px;
+    border: 3px solid;
+    text-align: center;
+
+}
+
+.card-title{
+    font-size: 20px;
+    text-align: center;
+}
+
+
+
