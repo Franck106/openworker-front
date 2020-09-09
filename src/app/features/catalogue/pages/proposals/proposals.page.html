@@ -1,1 +1,5 @@
 <p>proposals works!</p>
+
+<div *ngIf="proposals$ | async as proposals">
+    <app-proposal-list [proposals]="proposals"></app-proposal-list>
+</div>
