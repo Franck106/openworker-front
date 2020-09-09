@@ -4,7 +4,7 @@ import { HttpClient } from '@angular/common/http';
 import { Proposal } from './models/proposal';
 import { APIData } from './models/api-data';
 import { environment } from 'src/environments/environment';
-import { map, pluck } from "rxjs/operators";
+import { map, pluck, tap } from "rxjs/operators";
 
 @Injectable({
   providedIn: 'root'
@@ -15,12 +15,14 @@ export class CatalogueService {
 
   getProposals(): Observable<Proposal[]> {
     return this.http
-      .get<APIData<Proposal[]>>(`${environment.apiUrl}/api/proposals`)
+      .get<Proposal[]>(`${environment.apiUrl}/api/proposals`)
       .pipe(
-        pluck("data"),
-        map((proposals) => proposals.map((proposal) => ({
+        //tap((response) => console.log(response)),
+        //pluck("data"),
+        map((proposals) => 
+          proposals.map((proposal) => ({
           ...proposal,
-        })))
+        }))),
       );
   }
 }

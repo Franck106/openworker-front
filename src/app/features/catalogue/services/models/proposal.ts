@@ -6,7 +6,7 @@ export interface Proposal {
     name: string,
     image?: string,
     description: string,
-    price: 50.0,
+    price: number,
     category: Category,
     provider: User,
     maxDistance: number,

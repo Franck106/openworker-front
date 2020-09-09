@@ -1,5 +1,5 @@
 export interface Credentials {
-    "id": number,
-    "login": string,
-    "hashedPassword": string
+    id: number,
+    login: string,
+    hashedPassword: string
 }

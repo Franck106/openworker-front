@@ -1,0 +1,19 @@
+@media all {
+    #proposal-list {
+        display: flex;
+        flex-wrap: wrap;
+    }
+    #proposal-list > app-proposal-item {
+        flex: calc(100% / 3);
+    }
+}
+
+@media all and (max-width: 459px) {
+    #proposal-list {
+        flex-direction: column;
+        flex-wrap: nowrap;
+    }
+    #proposal-list > app-proposal-item {
+        flex: 100%;
+    }
+}

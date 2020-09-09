@@ -1,5 +1,12 @@
-<p>proposals works!</p>
-
-<div *ngIf="proposals$ | async as proposals">
-    <app-proposal-list [proposals]="proposals"></app-proposal-list>
+<div >
+    <mat-toolbar>
+        <span>Les Services</span>
+    </mat-toolbar>
+    <app-proposal-list *ngIf="proposals$ | async as proposals; else proposalsLoading"
+        [proposals]="proposals"></app-proposal-list>
+    <ng-template #proposalsLoading>
+        <div class="center">
+            <mat-progress-spinner mode="indeterminate"></mat-progress-spinner>
+        </div>
+    </ng-template>
 </div>

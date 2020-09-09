@@ -1,2 +1,19 @@
-<p>proposal-item works!</p>
-<h1>{{proposal.name}}</h1>
+<article>
+    <mat-card>
+        <a [routerLink]="['#']">
+            <img [src]="'./assets/images/'+ proposal.category.image"
+                [alt]="proposal.category.name"
+                mat-card-image
+                loading="lazy"/>
+        </a>
+        <mat-card-title>
+            <a [routerLink]="['#']">{{proposal.name}}</a>
+        </mat-card-title>
+        <mat-card-content>
+            <p>{{proposal.provider.firstName}}</p>
+            <p>{{proposal.description}}</p>
+            <p>{{proposal.provider.globalRating}}</p>
+            <p>{{proposal.price}}</p>
+        </mat-card-content>
+    </mat-card>
+</article>
