@@ -1,1 +1,26 @@
-<p>header works!</p>
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <a class="navbar-brand" routerLink="/catalogue/home">OpenWorker</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav ml-auto" id="mainNav">
+            <li class="nav-item">
+                <span class="nav-link" routerLink="/catalogue/proposals">Rechercher un service</span>
+            </li>
+        </ul>
+
+        <ul class="navbar-nav ml-auto">
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" id="accountDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Mon compte
+                </a>
+                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="accountDropdown" id="accountDropdownMenu">
+                    <span class="dropdown-item" routerLink="/signin">Me connecter</span>
+                    <span class="dropdown-item" routerLink="/signup">Créer un compte</span>
+                </div>
+            </li>
+        </ul>
+    </div>
+</nav>
