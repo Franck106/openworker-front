@@ -3,7 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 
 const routes: Routes = [
   { path: 'catalogue', loadChildren: () => import('./features/catalogue/catalogue.module').then(m => m.CatalogueModule) },
-  { path: '', redirectTo: 'catalogue/proposals', pathMatch: 'full'}
+  { path: '', redirectTo: 'catalogue/home', pathMatch: 'full'}
 ];
 
 @NgModule({
