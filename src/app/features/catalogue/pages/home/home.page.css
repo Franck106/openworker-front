@@ -16,6 +16,7 @@
 }
 
 #titre{
+    margin: 20px auto 20px auto;
     font: bold;
     color: black;
     font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Verdana, sans-serif;
@@ -40,5 +41,22 @@
     text-align: center;
 }
 
+@media all {
+    #category-list {
+        display: flex;
+        flex-wrap: wrap;
+    }
+    #category-list > app-category-list {
+        flex: calc(100% / 3);
+    }
+}
 
-
+@media all and (max-width: 459px) {
+    #category-list {
+        flex-direction: column;
+        flex-wrap: nowrap;
+    }
+    #category-list > app-category-list {
+        flex: 100%;
+    }
+}
