@@ -39,15 +39,15 @@ a {
     box-sizing: inherit;
   }
   
-  html {
-    box-sizing: border-box;
-  }
-  
-  app-root {
-    display: block;
-    margin: 0 auto;
-    max-width: 960px;
-  }
+html {
+  box-sizing: border-box;
+}
+
+app-root {
+  display: block;
+  margin: 0 auto;
+  max-width: 960px;
+}
 
 /* Forms */
 

@@ -4,6 +4,8 @@ import { MatCardModule } from "@angular/material/card";
 import { MatButtonModule } from "@angular/material/button";
 import { MatToolbarModule } from "@angular/material/toolbar";
 import { MatProgressSpinnerModule } from "@angular/material/progress-spinner";
+import {MatPaginatorModule} from '@angular/material/paginator'; 
+import {MatIconModule} from '@angular/material/icon'; 
 
 import { CatalogueRoutingModule } from './catalogue-routing.module';
 import { ProposalsPage } from './pages/proposals/proposals.page';
@@ -25,7 +27,9 @@ import { HomePage } from './pages/home/home.page';
     MatButtonModule,
     MatToolbarModule,
     MatProgressSpinnerModule,
-    CatalogueRoutingModule
+    MatPaginatorModule,
+    CatalogueRoutingModule,
+    MatIconModule
   ]
 })
 export class CatalogueModule { }
