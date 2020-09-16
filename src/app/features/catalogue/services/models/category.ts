@@ -4,5 +4,6 @@ export interface Category {
     name: string,
     description?: string,
     category?: Category,
+    categories?: Category[],
     image: string
 }
