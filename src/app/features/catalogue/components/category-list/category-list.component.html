@@ -1,0 +1,12 @@
+<article>
+    <mat-card>
+        <a [routerLink]="['../proposals', category.id]">
+            <img [src]="'./assets/images/' + category.image"            
+                [alt]="category.name"
+                mat-card-image
+                loading="lazy">
+        </a>
+        <mat-card-title>{{category.name}}</mat-card-title>
+        <mat-card-subtitle>{{category.description}}</mat-card-subtitle>
+    </mat-card>
+</article>

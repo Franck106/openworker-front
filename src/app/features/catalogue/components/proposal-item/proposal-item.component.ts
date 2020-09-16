@@ -9,7 +9,7 @@ import { Proposal } from '../../services/models/proposal';
 })
 export class ProposalItemComponent implements OnInit {
 
-  @Input() proposal!: Proposal;
+  @Input() proposal: Proposal;
 
   constructor() { }
 
