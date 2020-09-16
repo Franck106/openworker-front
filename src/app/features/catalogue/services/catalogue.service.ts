@@ -16,13 +16,5 @@ export class CatalogueService {
   getProposals(): Observable<Proposal[]> {
     return this.http
       .get<Proposal[]>(`${environment.apiUrl}/api/proposals`)
-      .pipe(
-        //tap((response) => console.log(response)),
-        //pluck("data"),
-        map((proposals) => 
-          proposals.map((proposal) => ({
-          ...proposal,
-        }))),
-      );
   }
 }

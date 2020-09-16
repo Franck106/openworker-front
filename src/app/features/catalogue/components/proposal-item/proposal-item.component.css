@@ -1,0 +1,12 @@
+article {
+    margin: 20px;
+}
+
+.proposal-decription {
+    max-height: 30%;
+    overflow: hidden;
+}
+
+mat-card-img {
+    max-height: 50px;
+}
