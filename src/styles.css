@@ -7,14 +7,24 @@ body {
      height: 100%; 
 }
 
-body { 
-    margin: 0; 
+#main-section {
+    padding: 8px 20px;
+    width: 100%;
+    flex-shrink: 1;
+    flex-grow: 1;
+    overflow: auto;
+}
+
+body {
+    margin: 0;
     font-family: Roboto, "Helvetica Neue", sans-serif;
-    color: dimgrey;
+    _color: dimgrey;
     display: flex;
     flex-direction: column;
     height: 100vh;
-    _overflow: hidden;
+    overflow: hidden;
+    color: #14031f;
+    background: #fefdff;
 }
 
 h1,
@@ -44,9 +54,9 @@ html {
 }
 
 app-root {
-  display: block;
-  margin: 0 auto;
-  max-width: 960px;
+    display: block;
+    margin: 0 auto;
+    width: 100%;
 }
 
 /* Forms */
@@ -69,4 +79,37 @@ button + p > a {
 .mat-form-field {
     margin-bottom: 8px;
     width: 100%;
+}
+
+/* Nav bar */
+
+nav {
+    box-shadow: 0 0 7px 0 #00000024;
+    border-bottom: 1px solid #e4e4e4;
+}
+
+.navbar-light .navbar-nav .nav-link,
+nav {
+    color: white;
+}
+
+.bg-light {
+    background: linear-gradient(45deg, #26ab74, #b118ff);
+}
+
+.navbar-light .navbar-brand {
+    color: #ffffff;
+    font-weight: bold;
+    transition: 0.5s all;
+}
+
+.navbar-light .navbar-brand:active,
+.navbar-light .navbar-brand:focus, .navbar-light .navbar-brand:hover {
+    color: white;
+    transform: scale(1.05);
+}
+
+.navbar-light .navbar-nav .nav-link:focus, .navbar-light .navbar-nav .nav-link:hover {
+    color: white;
+    text-decoration: underline dashed;
 }
