@@ -14,8 +14,10 @@ export class SimpleAuthenticationService {
 
   currentUser: User | null;
 
-  register(user: User): Observable<User> {
-    return this.http.post<User>(`${environment.apiUrl}/api/users`, user);
+  register(user: User): Observable<UserOrError> {
+    return this.http.post<User>(`${environment.apiUrl}/api/users`, user).pipe(
+        catchError((err) => of(err.error))
+    );
   }
 
   signIn(login: string, password: string): Observable<UserOrError> {

@@ -2,15 +2,21 @@
     <h4>Créer un compte</h4>
     <div class="form-group">
         <label for="login">Identifiant*</label>
-        <input type="text" class="form-control" id="login"/>
+        <input type="text"
+               class="form-control"
+               id="login"
+               [(ngModel)]="login"
+               [class.error]="hasFieldError('login')"/>
     </div>
     <div class="form-group">
         <label for="email">Adresse e-mail*</label>
-        <input type="text" class="form-control" id="email"/>
+        <input type="text" class="form-control" id="email" [(ngModel)]="email"
+               [class.error]="hasFieldError('email')"/>
     </div>
     <div class="form-group">
         <label for="password">Mot de passe*</label>
-        <input type="password" class="form-control" id="password"/>
+        <input type="password" class="form-control" id="password" [(ngModel)]="password"
+               [class.error]="hasFieldError('password')"/>
     </div>
 
     <span class="alert alert-info" style="display: block;">
@@ -20,35 +26,35 @@
 
     <div class="form-group">
         <label for="lastName">Nom</label>
-        <input type="text" class="form-control" id="lastName"/>
+        <input type="text" class="form-control" id="lastName" [(ngModel)]="lastName"/>
     </div>
     <div class="form-group">
         <label for="firstName">Prénom</label>
-        <input type="text" class="form-control" id="firstName"/>
+        <input type="text" class="form-control" id="firstName" [(ngModel)]="firstName"/>
     </div>
     <div class="form-group">
         <label for="phoneNumber">Téléphone</label>
-        <input type="text" class="form-control" id="phoneNumber"/>
+        <input type="text" class="form-control" id="phoneNumber" [(ngModel)]="phoneNumber"/>
     </div>
     <div class="form-group">
         <label for="address">Adresse</label>
-        <input type="text" class="form-control" id="address"/>
+        <input type="text" class="form-control" id="address" [(ngModel)]="address"/>
     </div>
     <div class="form-group">
         <label for="postCode">Code postal</label>
-        <input type="text" class="form-control" id="postCode"/>
+        <input type="text" class="form-control" id="postCode" [(ngModel)]="postCode"/>
     </div>
     <div class="form-group">
         <label for="city">Ville</label>
-        <input type="text" class="form-control" id="city"/>
+        <input type="text" class="form-control" id="city" [(ngModel)]="city"/>
     </div>
 
 
     <div class="form-group">
         <input type="button" class="btn btn-primary mr-1" (click)="onSignup()" id="btnSearch" value="Envoyer"/>
     </div>
-    <div style="padding: 10px">
-        <span class="alert alert-danger" id="msg" style="display: none;"></span>
+    <div style="padding: 10px" *ngIf="errorMessage && errorMessage.length > 0">
+        <span class="alert alert-danger" id="msg">{{errorMessage}}</span>
     </div>
     <div class="link" routerLink="../login">Je possède déjà un compte</div>
     <div class="link" (click)="onDemoButtonClick()">Démo</div>

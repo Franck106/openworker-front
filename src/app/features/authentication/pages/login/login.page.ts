@@ -7,6 +7,12 @@ import {Router} from '@angular/router';
     styleUrls: ['./login.page.css']
 })
 export class LoginPage implements OnInit {
+    requiredFields: (keyof LoginPage)[] = [
+        'login', 'password'
+    ];
+
+    fieldErrors = new Map<string, string>();
+
     login: string;
     password: string;
     errorMessage?: string;
@@ -21,13 +27,39 @@ export class LoginPage implements OnInit {
     onLogin(): void {
         this.errorMessage = undefined;
 
-        this.authService.signIn(this.login, this.password)
-            .subscribe(logged => {
-                if (logged.error) {
-                    this.errorMessage = logged.error;
-                } else {
-                    this.router.navigateByUrl('/');
-                }
-            });
+        if (this.isFormValid()) {
+            this.authService.signIn(this.login, this.password)
+                .subscribe(logged => {
+                    if (logged.error) {
+                        this.errorMessage = logged.error;
+                    } else {
+                        this.router.navigateByUrl('/');
+                    }
+                });
+        } else {
+            this.errorMessage = 'Veuillez renseigner tous les champs.';
+        }
+    }
+
+    hasFieldError(fieldName: string): boolean {
+        return this.fieldErrors.get(fieldName) != null;
+    }
+
+    private isFormValid(): boolean {
+        let errorCount = 0;
+
+        for (const field of this.requiredFields) {
+            const isBlank = ! this[field]
+                || (this[field] as string).trim().length === 0;
+
+            if (isBlank) {
+                this.fieldErrors.set(field, 'required');
+                errorCount++;
+            } else {
+                this.fieldErrors.delete(field);
+            }
+        }
+
+        return errorCount === 0;
     }
 }

@@ -1,7 +1,7 @@
 import { Credentials } from './credentials';
 
 export interface User {
-    id: number;
+    id?: number;
     firstName: string;
     lastName: string;
     address: string;
@@ -12,11 +12,11 @@ export interface User {
     premium?: boolean;
     admin?: boolean;
     registrationNumber?: string;
-    globalRating: number;
+    globalRating?: number;
     image?: string;
     credentials?: Credentials;
     login?: string;
     password?: string;
     role?: string;
-    geolocation: string;
+    geolocation?: string;
 }
