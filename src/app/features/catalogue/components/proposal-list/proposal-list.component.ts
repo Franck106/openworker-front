@@ -9,7 +9,7 @@ import { Proposal } from '../../services/models/proposal';
 })
 export class ProposalListComponent implements OnInit {
 
-  @Input() proposals!: ReadonlyArray<Proposal> | null;
+  @Input() proposals: ReadonlyArray<Proposal> | null;
 
   constructor() { }
 
