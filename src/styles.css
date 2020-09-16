@@ -4,7 +4,7 @@
 
 html,
 body {
-     height: 100%; 
+    height: 100%;
 }
 
 #main-section {
@@ -29,34 +29,36 @@ body {
 
 h1,
 h1 > a {
-  color: #35224b;
+    color: #35224b;
 }
 
 h2,
 a,
 mat-card-title {
-  color: #62066e;
-  padding: 5px;
+    color: #62066e;
+    padding: 5px;
 }
 
 a {
     text-decoration: none;
-  }
+}
 
 /* Container */
 
 * {
     box-sizing: inherit;
-  }
-  
+}
+
 html {
-  box-sizing: border-box;
+    box-sizing: border-box;
 }
 
 app-root {
-    display: block;
+    display: flex;
     margin: 0 auto;
     width: 100%;
+    flex-direction: column;
+    height: 100%;
 }
 
 /* Forms */
