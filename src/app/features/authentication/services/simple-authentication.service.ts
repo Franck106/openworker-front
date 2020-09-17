@@ -1,18 +1,25 @@
 import { Injectable } from '@angular/core';
-import {Observable, of} from 'rxjs';
+import {BehaviorSubject, Observable, of, Subject} from 'rxjs';
 import {User} from '../../catalogue/services/models/user';
 import {environment} from '../../../../environments/environment';
 import {HttpClient} from '@angular/common/http';
-import {catchError, tap} from 'rxjs/operators';
+import {catchError, map, tap} from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
 })
 export class SimpleAuthenticationService {
 
-  constructor(private http: HttpClient) { }
+  public readonly currentUser$: Observable<User | null>;
 
-  currentUser: User | null;
+  constructor(private http: HttpClient) {
+    this._currentUserSubject$ = new BehaviorSubject(this._currentUser);
+
+    this.currentUser$ = this._currentUserSubject$.asObservable();
+  }
+
+  private _currentUserSubject$: Subject<User | null>;
+  private _currentUser: User | null = null;
 
   register(user: User): Observable<UserOrError> {
     return this.http.post<User>(`${environment.apiUrl}/api/users`, user).pipe(
@@ -26,8 +33,10 @@ export class SimpleAuthenticationService {
 
     return this.http.post<UserOrError>(url, body).pipe(
         tap((response) => {
-          if (response.error != null) {
-            this.currentUser = response;
+          if (response.error == null) {
+            this._currentUser = response;
+            this._currentUserSubject$.next(this._currentUser);
+            console.log('logged as ' + this._currentUser.login);
           }
         }),
         catchError((err) => of(err.error))
@@ -35,15 +44,13 @@ export class SimpleAuthenticationService {
   }
 
   isLoggedIn(): Observable<boolean> {
-    return of(this.currentUser != null);
-  }
-
-  getAuthenticatedUser(): Observable<User | null> {
-    return of(this.currentUser);
+    return this.currentUser$.pipe(
+        map(user => user != null));
   }
 
   logOut(): void {
-    this.currentUser = null;
+    this._currentUser = null;
+    this._currentUserSubject$.next(this._currentUser);
   }
 }
 
