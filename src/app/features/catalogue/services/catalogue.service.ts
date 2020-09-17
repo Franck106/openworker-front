@@ -5,11 +5,13 @@ import { Proposal } from './models/proposal';
 import { environment } from 'src/environments/environment';
 import { Category } from './models/category';
 import { map, pluck, tap } from 'rxjs/operators';
+import { User } from './models/user';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CatalogueService {
+
 
   constructor(private http: HttpClient) { }
 
@@ -38,6 +40,15 @@ export class CatalogueService {
       map((categories) => categories.find((category) => category.id == categoryId)?.categories)
     )
   }
+
+  getUsers(): Observable<User[]>{
+   return this.http.get<User[]>(`${environment.apiUrl}/api/users`);
+  }
+
+  getUserById(userId: number): Observable<User | undefined>{
+    return this.getUsers().pipe(map(users => users.find(user => user.id == userId)));
+  } 
+
 
 }
 
