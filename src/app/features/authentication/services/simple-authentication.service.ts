@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {BehaviorSubject, Observable, of, Subject} from 'rxjs';
 import {User} from '../../catalogue/services/models/user';
 import {environment} from '../../../../environments/environment';
@@ -16,6 +16,8 @@ export class SimpleAuthenticationService {
     this._currentUserSubject$ = new BehaviorSubject(this._currentUser);
 
     this.currentUser$ = this._currentUserSubject$.asObservable();
+
+    this.checkUserInSession();
   }
 
   private _currentUserSubject$: Subject<User | null>;
@@ -37,6 +39,9 @@ export class SimpleAuthenticationService {
             this._currentUser = response;
             this._currentUserSubject$.next(this._currentUser);
             console.log('logged as ' + this._currentUser.login);
+
+            // TODO remove
+            localStorage.setItem('userLoggedIn', JSON.stringify(this._currentUser));
           }
         }),
         catchError((err) => of(err.error))
@@ -44,6 +49,9 @@ export class SimpleAuthenticationService {
   }
 
   isLoggedIn(): Observable<boolean> {
+    // Check session
+    this.checkUserInSession();
+
     return this.currentUser$.pipe(
         map(user => user != null));
   }
@@ -51,6 +59,22 @@ export class SimpleAuthenticationService {
   logOut(): void {
     this._currentUser = null;
     this._currentUserSubject$.next(this._currentUser);
+
+    // TODO remove
+    localStorage.setItem('userLoggedIn', JSON.stringify(null));
+  }
+
+  private checkUserInSession(): void {
+    const session = localStorage.getItem('userLoggedIn');
+
+    if (session && session !== '') {
+      try {
+        this._currentUser = JSON.parse(session);
+        this._currentUserSubject$.next(this._currentUser);
+      } catch (e) {
+        console.error(e);
+      }
+    }
   }
 }
 
