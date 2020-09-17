@@ -1,0 +1,61 @@
+#main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#titre{
+    font: bold;
+    color: black;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Verdana, sans-serif;
+    text-shadow: bisque;
+    text-align: center;
+}
+
+.user-card {
+    margin: 30px;
+    width: 280px !important;
+    padding: 30px 30px 30px 30px;
+    box-shadow: inset 2px 3px 11px #00000029;
+    border-radius: 5px;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    
+}
+
+.profile-picture {
+    width: 150px;
+    height: 150px;
+    overflow: hidden;
+    object-fit: cover;
+    border-radius: 50%;
+}
+
+.premium-card {
+    border: 1px solid gold;
+    box-shadow: 0 0 7px 0 #ffd70042;
+}
+
+img.user-star {
+    width: 40px;
+    height: 40px;
+}
+
+span.user-ratings {
+    font-size: 20px;
+    font-weight: bold;
+    transform: translate(-0, 30px);
+    position: absolute;
+}
+
+.ratings-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: 6px;
+    border: 1px solid lightgrey;
+    border-radius: 4px;
+    margin-top: 12px;
+}

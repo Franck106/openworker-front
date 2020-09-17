@@ -13,6 +13,7 @@ import { ProposalListComponent } from './components/proposal-list/proposal-list.
 import { ProposalItemComponent } from './components/proposal-item/proposal-item.component';
 import { HomePage } from './pages/home/home.page';
 import { CategoryListComponent } from './components/category-list/category-list.component';
+import { UserProfilePage } from './pages/user-profile/user-profile.page';
 
 
 @NgModule({
@@ -21,7 +22,8 @@ import { CategoryListComponent } from './components/category-list/category-list.
     ProposalListComponent,
     ProposalItemComponent,
     HomePage,
-    CategoryListComponent
+    CategoryListComponent,
+    UserProfilePage
   ],
   imports: [
     CommonModule,
