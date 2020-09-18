@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {SimpleAuthenticationService} from '../../services/simple-authentication.service';
+import {SimpleAuthenticationService} from '../../../authentication/services/simple-authentication.service';
 import {Observable} from 'rxjs';
 import {User} from '../../../catalogue/services/models/user';
 import {filter, take} from 'rxjs/operators';

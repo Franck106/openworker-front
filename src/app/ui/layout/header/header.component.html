@@ -9,9 +9,14 @@
             <li class="nav-item">
                 <span class="nav-link" routerLink="/catalogue/proposals">Rechercher un service</span>
             </li>
-            <li class="nav-item">
-                <span class="nav-link" routerLink="/catalogue/add-proposal">Ajouter un service</span>
-            </li>
+            <ng-container *ngIf="currentUser$ | async">
+                <li class="nav-item">
+                    <span class="nav-link" routerLink="/user/activity">Mon activité</span>
+                </li>
+                <li class="nav-item">
+                    <span class="nav-link" routerLink="/catalogue/add-proposal">Ajouter un service</span>
+                </li>
+            </ng-container>
         </ul>
 
         <ul class="navbar-nav ml-auto">
@@ -20,7 +25,7 @@
                     {{user.login}}
                 </a>
                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="accountDropdown2" id="accountDropdownMenu2">
-                    <span class="dropdown-item" routerLink="/auth/account">Mon compte</span>
+                    <span class="dropdown-item" routerLink="/user/account">Mon compte</span>
                     <span class="dropdown-item" (click)="onLogOutClicked()">Me déconnecter</span>
                 </div>
             </li>

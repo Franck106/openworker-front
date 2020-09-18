@@ -1,0 +1,61 @@
+<div class="text-center mt-4" *ngIf="activity$ | async as activity">
+    <h3>Mes annonces</h3>
+    <div id="flexCategories" class="d-flex flex-row justify-content-center">
+        <app-proposal-list [proposals]="activity.userProposals">
+        </app-proposal-list>
+    </div>
+
+    <hr class="mt-2 mb-3">
+
+    <h3>Demandes reçues</h3>
+    <div id="myDemands" class="container mt-3 mb-4">
+        <div class="row table-header">
+            <div class="col-sm">Statut</div>
+            <div class="col-sm">Service</div>
+            <div class="col-sm">Client</div>
+            <div class="col-sm">Début</div>
+            <div class="col-sm">Fin</div>
+            <div class="col-sm">Prix</div>
+            <div class="col-sm">Avis reçu</div>
+        </div>
+
+        <div *ngFor="let dem of activity.userDemands" class="row">
+            <div class="col-sm">{{getStatus(dem)}}</div>
+            <div class="col-sm">{{dem.proposal.name}}</div>
+            <div class="col-sm">{{dem.customer.firstName}} {{dem.customer.lastName}}</div>
+            <div class="col-sm">{{formatDate(dem.startDate)}}</div>
+            <div class="col-sm">{{formatDate(dem.endDate)}}</div>
+            <div class="col-sm">{{dem.proposal.price}} €</div>
+            <div class="col-sm">
+                <app-five-star-rating [ratings]="dem.providerRating"></app-five-star-rating>
+            </div>
+        </div>
+    </div>
+
+    <hr class="mt-2 mb-3">
+
+    <h3>Demandes envoyées</h3>
+    <div id="myPrestations" class="container mt-3 mb-4">
+        <div class="row table-header">
+            <div class="col-sm">Statut</div>
+            <div class="col-sm">Service</div>
+            <div class="col-sm">Prestataire</div>
+            <div class="col-sm">Début</div>
+            <div class="col-sm">Fin</div>
+            <div class="col-sm">Prix</div>
+            <div class="col-sm">Votre avis</div>
+        </div>
+
+        <div *ngFor="let prestation of activity.userPrestations" class="row">
+            <div class="col-sm">{{getStatus(prestation)}}</div>
+            <div class="col-sm">{{prestation.proposal.name}}</div>
+            <div class="col-sm">{{prestation.proposal.provider.firstName}} {{prestation.proposal.provider.lastName}}</div>
+            <div class="col-sm">{{formatDate(prestation.startDate)}}</div>
+            <div class="col-sm">{{formatDate(prestation.endDate)}}</div>
+            <div class="col-sm">{{prestation.proposal.price}} €</div>
+            <div class="col-sm">
+                <app-five-star-rating [ratings]="prestation.customerRating"></app-five-star-rating>
+            </div>
+        </div>
+    </div>
+</div>
