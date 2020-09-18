@@ -56,12 +56,11 @@ export class CatalogueService {
     );
   }
 
-  addProposal(proposal: Proposal) {
+  addProposal(proposal: Proposal): Observable<Proposal> {
+    console.log(proposal);
     return this.http
-      .post<Proposal>(`${environment.apiUrl}/api/proposals`, {
-        proposal: JSON.stringify(proposal),
-      })
-      .pipe(tap((response) => console.log(response)));
+      .post<Proposal>(`${environment.apiUrl}/api/proposals`, proposal)
+      .pipe(tap((response) => console.log('Service : ' + response)));
   }
 }
 

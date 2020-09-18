@@ -76,6 +76,18 @@ export class SimpleAuthenticationService {
       }
     }
   }
+
+  getConnectedUser(): User {
+    let value = null;
+    try {
+      const item = localStorage.getItem('userLoggedIn');
+      console.log('item:' + item);
+      value = item ? JSON.parse(item) : null;
+    } catch(err) {
+      value = null;
+    }
+    return value;
+  }
 }
 
 interface UserOrError extends User {

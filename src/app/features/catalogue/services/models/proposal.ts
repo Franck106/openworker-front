@@ -2,7 +2,7 @@ import { Category } from './category';
 import { User } from './user';
 
 export interface Proposal {
-    id: number,
+    id?: number,
     name: string,
     image?: string,
     description: string,
@@ -10,5 +10,5 @@ export interface Proposal {
     category: Category,
     provider: User,
     maxDistance: number,
-    date: string
+    date: Date
 }

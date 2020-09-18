@@ -10,7 +10,7 @@
                 <span class="nav-link" routerLink="/catalogue/proposals">Rechercher un service</span>
             </li>
             <li class="nav-item">
-                <span class="nav-link" routerLink="/catalogue/add-proposal">Ajouter un service</span>
+                <span class="nav-link" *ngIf="(currentUser$ | async) as user" routerLink="/catalogue/add-proposal">Ajouter un service</span>
             </li>
         </ul>
 
