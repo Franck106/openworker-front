@@ -17,7 +17,6 @@ import { ProposalItemComponent } from './components/proposal-item/proposal-item.
 import { HomePage } from './pages/home/home.page';
 import { CategoryListComponent } from './components/category-list/category-list.component';
 import { UserProfilePage } from './pages/user-profile/user-profile.page';
-import { AddProposalComponent } from './components/add-proposal/add-proposal.component';
 import { AddProposalPage } from './pages/add-proposal/add-proposal.page';
 
 
@@ -29,7 +28,6 @@ import { AddProposalPage } from './pages/add-proposal/add-proposal.page';
     HomePage,
     CategoryListComponent,
     UserProfilePage,
-    AddProposalComponent,
     AddProposalPage
   ],
   imports: [

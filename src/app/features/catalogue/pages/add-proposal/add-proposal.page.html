@@ -1,4 +1,29 @@
 <mat-card>
+    <form method="post" (ngSubmit)="addProposal()">
     <mat-card-title>Proposer un service</mat-card-title>
-    <app-add-proposal *ngIf="categories$ | async as categories" [categories]="categories"></app-add-proposal>
+        <mat-form-field *ngIf="categories$ | async as categories">
+            <mat-label>Type de service</mat-label>
+            <mat-select name="categorie">
+                <mat-option *ngFor="let categorie of categories"
+                [value]="categorie" >{{categorie.name}}</mat-option>
+            </mat-select>
+        </mat-form-field>
+        <mat-form-field>
+            <mat-label>Description</mat-label>
+            <textarea matInput placeholder="Décrivez-vous et votre service en quelques mots"></textarea>
+        </mat-form-field>
+        <mat-form-field>
+            <mat-label>Prix estimé</mat-label>
+            <input matInput type="number" placeholder="nombre entier svp">
+        </mat-form-field>
+        <mat-form-field>
+            <mat-label>Rayon d'action</mat-label>
+            <input matInput type="number" placeholder="distance max en km">
+        </mat-form-field>
+        <button type="submit"
+              mat-raised-button
+              color="accent">
+             Valider
+        </button>
+    </form>  
 </mat-card>
