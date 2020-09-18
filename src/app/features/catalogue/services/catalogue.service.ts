@@ -50,6 +50,14 @@ export class CatalogueService {
   } 
 
 
+  addProposal(proposal: Proposal) {
+    return this.http.post<Proposal>(`${environment.apiUrl}/api/proposals`, {
+      proposal: JSON.stringify(proposal)
+    }).pipe(
+      tap(response => console.log(response))
+    );
+  }
+
 }
 
 interface ProposalSearchResponse {

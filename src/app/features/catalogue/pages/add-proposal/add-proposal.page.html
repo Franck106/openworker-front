@@ -1,0 +1,4 @@
+<mat-card>
+    <mat-card-title>Proposer un service</mat-card-title>
+    <app-add-proposal *ngIf="categories$ | async as categories" [categories]="categories"></app-add-proposal>
+</mat-card>
