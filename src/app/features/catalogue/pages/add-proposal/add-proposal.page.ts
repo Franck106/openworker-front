@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import {
+  FormBuilder,
+  Validators,
+} from '@angular/forms';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { SimpleAuthenticationService } from 'src/app/features/authentication/services/simple-authentication.service';
@@ -9,25 +12,25 @@ import { Proposal } from '../../services/models/proposal';
 
 @Component({
   templateUrl: './add-proposal.page.html',
-  styleUrls: ['./add-proposal.page.css']
+  styleUrls: ['./add-proposal.page.css'],
 })
 export class AddProposalPage implements OnInit {
-
   form = this.formBuilder.group({
-    category:['', Validators.required],
-    name:['', Validators.required],
+    category: ['', Validators.required],
+    name: ['', Validators.required],
     description: ['', Validators.required],
     price: ['', Validators.required],
     maxDistance: ['', Validators.required],
   });
 
-
   categories$: Observable<Category[]>;
 
-  constructor(private catalogue: CatalogueService,
+  constructor(
+    private catalogue: CatalogueService,
     private formBuilder: FormBuilder,
     private router: Router,
-    private auth: SimpleAuthenticationService) { }
+    private auth: SimpleAuthenticationService,
+  ) {}
 
   ngOnInit(): void {
     this.categories$ = this.catalogue.getCategories();
@@ -42,26 +45,16 @@ export class AddProposalPage implements OnInit {
       category: this.form.value.category,
       provider: this.auth.getConnectedUser(),
       maxDistance: this.form.value.maxDistance,
-      date: new Date()
+      date: new Date(),
     };
     console.log(proposal);
-    this.catalogue.addProposal(proposal).subscribe(
-      (response) => {
-        if(response == null) {
-          console.error('Server error');
-        } else {
-          console.log(response);
-          this.router.navigateByUrl('/');
-        }
+    this.catalogue.addProposal(proposal).subscribe((response) => {
+      if (response == null) {
+        console.error('Server error');
+      } else {
+        console.log(response);
+        this.router.navigateByUrl('/');
       }
-    );
+    });
   }
-
-  demo() {
-    this.form.value.description = 'bla';
-    this.form.value.name = 'blo';
-    this.form.value.price = 4;
-    this.form.value.maxDistance=3;
-  }
-
 }
