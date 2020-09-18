@@ -6,17 +6,20 @@ import {ActivityService} from '../../services/activity.service';
 import {filter, switchMap} from 'rxjs/operators';
 import {UserActivity} from '../../../catalogue/services/models/user-activity';
 import {Prestation} from '../../../catalogue/services/models/prestation';
+import {DatePipe} from '@angular/common';
 
 @Component({
   templateUrl: './activity.page.html',
-  styleUrls: ['./activity.page.css']
+  styleUrls: ['./activity.page.css'],
+  providers: [DatePipe]
 })
 export class ActivityPage implements OnInit {
 
   activity$: Observable<UserActivity | undefined>;
 
   constructor(private authService: SimpleAuthenticationService,
-              private activityService: ActivityService) {
+              private activityService: ActivityService,
+              private datePipe: DatePipe) {
     this.activity$ = authService.currentUser$.pipe(
       // @ts-ignore
       filter(user => !!user),
@@ -32,5 +35,13 @@ export class ActivityPage implements OnInit {
     return prestation.delivered ? 'Terminé' :
       (prestation.cancelled ? 'Annulée' :
         (prestation.valide ? 'En cours' : 'En attente'));
+  }
+
+  formatDate(date: Date): string | null {
+    if (date != null) {
+      return this.datePipe.transform(date, 'dd/MM/yyyy');
+    }
+
+    return '-';
   }
 }

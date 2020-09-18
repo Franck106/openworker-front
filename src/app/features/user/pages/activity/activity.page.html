@@ -23,10 +23,12 @@
             <div class="col-sm">{{getStatus(dem)}}</div>
             <div class="col-sm">{{dem.proposal.name}}</div>
             <div class="col-sm">{{dem.customer.firstName}} {{dem.customer.lastName}}</div>
-            <div class="col-sm">{{dem.startDate | date}}</div>
-            <div class="col-sm">{{dem.endDate | date}}</div>
+            <div class="col-sm">{{formatDate(dem.startDate)}}</div>
+            <div class="col-sm">{{formatDate(dem.endDate)}}</div>
             <div class="col-sm">{{dem.proposal.price}} €</div>
-            <div class="col-sm">{{dem.providerRating}}</div>
+            <div class="col-sm">
+                <app-five-star-rating [ratings]="dem.providerRating"></app-five-star-rating>
+            </div>
         </div>
     </div>
 
@@ -44,14 +46,16 @@
             <div class="col-sm">Votre avis</div>
         </div>
 
-        <div *ngFor="let dem of activity.userPrestations" class="row">
-            <div class="col-sm">status</div>
-            <div class="col-sm">{{dem.proposal.name}}</div>
-            <div class="col-sm">{{dem.proposal.provider.firstName}} {{dem.proposal.provider.lastName}}</div>
-            <div class="col-sm">{{dem.startDate | date}}</div>
-            <div class="col-sm">{{dem.endDate | date}}</div>
-            <div class="col-sm">{{dem.proposal.price}} €</div>
-            <div class="col-sm">{{dem.customerRating}}</div>
+        <div *ngFor="let prestation of activity.userPrestations" class="row">
+            <div class="col-sm">{{getStatus(prestation)}}</div>
+            <div class="col-sm">{{prestation.proposal.name}}</div>
+            <div class="col-sm">{{prestation.proposal.provider.firstName}} {{prestation.proposal.provider.lastName}}</div>
+            <div class="col-sm">{{formatDate(prestation.startDate)}}</div>
+            <div class="col-sm">{{formatDate(prestation.endDate)}}</div>
+            <div class="col-sm">{{prestation.proposal.price}} €</div>
+            <div class="col-sm">
+                <app-five-star-rating [ratings]="prestation.customerRating"></app-five-star-rating>
+            </div>
         </div>
     </div>
 </div>
