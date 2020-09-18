@@ -1,0 +1,22 @@
+.col-sm {
+    padding: 4px;
+    border-bottom: solid 1px #80808054;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+}
+
+.table-header .col-sm {
+    border-bottom: solid 1px #80808080;
+    font-weight: bold;
+}
+
+.rating-star {
+    width: 13px;
+    height: 13px;
+}
+
+#myDemands,
+#myPrestations {
+    text-align: left;
+}

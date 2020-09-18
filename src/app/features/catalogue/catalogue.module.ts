@@ -43,6 +43,6 @@ import { AddProposalPage } from './pages/add-proposal/add-proposal.page';
     MatSelectModule,
     MatInputModule
   ],
-  exports: [CategoryListComponent]
+  exports: [CategoryListComponent, ProposalListComponent]
 })
 export class CatalogueModule { }
