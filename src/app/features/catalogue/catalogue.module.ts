@@ -6,6 +6,9 @@ import { MatToolbarModule } from "@angular/material/toolbar";
 import { MatProgressSpinnerModule } from "@angular/material/progress-spinner";
 import {MatPaginatorModule} from '@angular/material/paginator'; 
 import {MatIconModule} from '@angular/material/icon'; 
+import {MatFormFieldModule} from '@angular/material/form-field'; 
+import {MatSelectModule} from '@angular/material/select'; 
+import {MatInputModule} from '@angular/material/input'; 
 
 import { CatalogueRoutingModule } from './catalogue-routing.module';
 import { ProposalsPage } from './pages/proposals/proposals.page';
@@ -14,6 +17,7 @@ import { ProposalItemComponent } from './components/proposal-item/proposal-item.
 import { HomePage } from './pages/home/home.page';
 import { CategoryListComponent } from './components/category-list/category-list.component';
 import { UserProfilePage } from './pages/user-profile/user-profile.page';
+import { AddProposalPage } from './pages/add-proposal/add-proposal.page';
 
 
 @NgModule({
@@ -23,7 +27,8 @@ import { UserProfilePage } from './pages/user-profile/user-profile.page';
     ProposalItemComponent,
     HomePage,
     CategoryListComponent,
-    UserProfilePage
+    UserProfilePage,
+    AddProposalPage
   ],
   imports: [
     CommonModule,
@@ -33,7 +38,10 @@ import { UserProfilePage } from './pages/user-profile/user-profile.page';
     MatProgressSpinnerModule,
     MatPaginatorModule,
     CatalogueRoutingModule,
-    MatIconModule
+    MatIconModule,
+    MatFormFieldModule,
+    MatSelectModule,
+    MatInputModule
   ],
   exports: [CategoryListComponent]
 })
