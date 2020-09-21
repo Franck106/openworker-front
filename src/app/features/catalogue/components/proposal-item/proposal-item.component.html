@@ -1,13 +1,13 @@
 <article>
     <mat-card>
-        <a [routerLink]="['#']">
+        <a [routerLink]="['../../user', proposal.provider.id]">
             <img [src]="proposal.provider.image || './assets/images/default.png'"
                 [alt]="proposal.provider.firstName"
                 mat-card-image
                 loading="lazy"/>
         </a>
         <mat-card-title>
-            <a [routerLink]="['#']">{{proposal.provider.firstName}} {{proposal.provider.lastName}}</a>
+            <a [routerLink]="['../../user', proposal.provider.id]">{{proposal.provider.firstName}} {{proposal.provider.lastName}}</a>
         </mat-card-title>
         <mat-card-content>
             <mat-icon aria-hidden="false" aria-label="city">home</mat-icon>
