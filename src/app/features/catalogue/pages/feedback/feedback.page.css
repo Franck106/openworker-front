@@ -1,0 +1,14 @@
+.star-image {
+    margin: 4px;
+    cursor: pointer;
+}
+
+.star-image:not(.active) {
+    filter: saturate(0%);
+}
+
+.rating-span {
+    font-size: larger;
+    margin-top: 10px;
+    margin-bottom: 12px;
+}

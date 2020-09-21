@@ -6,6 +6,7 @@ import { environment } from 'src/environments/environment';
 import { Category } from './models/category';
 import { map, pluck, tap } from 'rxjs/operators';
 import { User } from './models/user';
+import {Prestation} from './models/prestation';
 
 @Injectable({
   providedIn: 'root',
@@ -61,6 +62,18 @@ export class CatalogueService {
     return this.http
       .post<Proposal>(`${environment.apiUrl}/api/proposals`, proposal)
       .pipe(tap((response) => console.log('Service : ' + response)));
+  }
+
+  getPrestationById(id: number): Observable<Prestation> {
+    return this.http.get<Prestation>(`${environment.apiUrl}/api/prestation/${id}`);
+  }
+
+  addFeedback(prestationId: number, rating: number, comment: string): Observable<void> {
+    return this.http
+      .put<void>(`${environment.apiUrl}/api/prestation/feedback`, {
+        id: prestationId,
+        customerRating: rating,
+      });
   }
 }
 
