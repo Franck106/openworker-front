@@ -9,9 +9,9 @@ import { FeedbackPage } from './pages/feedback/feedback.page';
 const routes: Routes = [
   { path: 'proposals/:id', component: ProposalsPage },
   { path: 'home', component: HomePage },
-  { path: 'user', component: UserProfilePage },
   { path: 'add-proposal', component: AddProposalPage },
   { path: 'feedback/:id', component: FeedbackPage },
+  { path: 'user/:id', component: UserProfilePage }
 ];
 
 @NgModule({
