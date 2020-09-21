@@ -27,7 +27,12 @@
             <div class="col-sm">{{formatDate(dem.endDate)}}</div>
             <div class="col-sm">{{dem.proposal.price}} €</div>
             <div class="col-sm">
-                <app-five-star-rating [ratings]="dem.providerRating"></app-five-star-rating>
+                <ng-container *ngIf="dem.cancelled ; else providerRating">
+                    -
+                </ng-container>
+                <ng-template #providerRating>
+                    <app-five-star-rating [ratings]="dem.providerRating"></app-five-star-rating>
+                </ng-template>
             </div>
         </div>
     </div>
@@ -54,7 +59,17 @@
             <div class="col-sm">{{formatDate(prestation.endDate)}}</div>
             <div class="col-sm">{{prestation.proposal.price}} €</div>
             <div class="col-sm">
-                <app-five-star-rating [ratings]="prestation.customerRating"></app-five-star-rating>
+                <ng-container *ngIf="prestation.providerRating && ! prestation.cancelled; else conclude">
+                    <app-five-star-rating [ratings]="prestation.providerRating"></app-five-star-rating>
+                </ng-container>
+                <ng-template #conclude>
+                    <ng-container *ngIf="prestation.cancelled ; else concludeLink">
+                        -
+                    </ng-container>
+                    <ng-template #concludeLink>
+                        <a [routerLink]="'/catalogue/feedback/' + prestation.id">Conclure</a>
+                    </ng-template>
+                </ng-template>
             </div>
         </div>
     </div>

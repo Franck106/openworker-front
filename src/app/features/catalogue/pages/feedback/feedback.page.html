@@ -1,0 +1,57 @@
+<div *ngIf="prestation$ | async as prestation; else nopresta" class="text-center form-group"
+     style="padding:3%; max-width: 800px; margin: auto;">
+
+    <ng-container *ngIf="prestation.customerRating; else form">
+        <h4>Prestation #{{prestation.id}}</h4>
+        <h5>Vous avez donné la note suivante à {{prestation.proposal.provider.firstName}}</h5>
+
+        <div>
+            <img *ngFor="let idx of array5"
+                 class="star-image"
+                 [class.active]="idx < rating"
+                 src="assets/images/star.png"
+                 [width]="starSize" [height]="starSize"
+                 alt="star"
+            style="cursor: default">
+        </div>
+        <div class="rating-span">{{rating}}/5</div>
+        <a href="" onclick="injectHTML('home')">Retour à l'accueil</a>
+    </ng-container>
+
+    <ng-template #form>
+        <h4>Conclure la prestation #{{prestation.id}}</h4>
+        <h5>Qu'avez-vous pensé du service rendu ?</h5>
+
+        <div>
+            <img *ngFor="let idx of array5"
+                 class="star-image"
+                 [class.active]="idx < rating"
+                 src="assets/images/star.png"
+                 [width]="starSize" [height]="starSize"
+                 alt="star"
+                 (click)="setRating(idx + 1)">
+        </div>
+        <div class="rating-span">{{rating}}/5</div>
+
+        <div class="form-group">
+            <label for="comment">Laisser un commentaire à {{prestation.proposal.provider.firstName}} :</label>
+            <textarea class="form-control" id="comment" [disabled]="submitted"></textarea>
+        </div>
+        <div class="form-group">
+            <input type="button" class="btn btn-primary mr-1" (click)="onSubmit()" value="Valider" [disabled]="submitted"/>
+        </div>
+        <div style="padding: 10px" *ngIf="submitted">
+        <span class="alert">
+            La prestation a été validée. Merci ! <a href="/">Retour à l'accueil</a>
+        </span>
+        </div>
+    </ng-template>
+</div>
+
+<ng-template #nopresta>
+    <div class="text-center form-group"
+         style="padding:3%; max-width: 800px; margin: auto;">
+        <p>La page demandée n'existe pas.</p>
+        <a href="/">Retour à l'accueil</a>
+    </div>
+</ng-template>
