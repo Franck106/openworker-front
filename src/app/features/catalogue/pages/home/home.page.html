@@ -1,6 +1,8 @@
 <div id="titre">
   <h1>{{title}}</h1>
 </div>
+
+<app-google-map *ngIf="proposals$ | async as proposals" [proposals]="proposals"></app-google-map>
   
 <div id="category-list" *ngIf="categories$ | async as categories">
   <app-category-list *ngFor="let category of categories" [category]="category"></app-category-list>
