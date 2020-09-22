@@ -20,6 +20,8 @@ import { CategoryListComponent } from './components/category-list/category-list.
 import { UserProfilePage } from './pages/user-profile/user-profile.page';
 import { AddProposalPage } from './pages/add-proposal/add-proposal.page';
 import { FeedbackPage } from './pages/feedback/feedback.page';
+import { GoogleMapModule } from '../../ui/google-map/google-map.module';
+
 
 @NgModule({
   declarations: [
@@ -44,7 +46,8 @@ import { FeedbackPage } from './pages/feedback/feedback.page';
     MatFormFieldModule,
     MatSelectModule,
     MatInputModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    GoogleMapModule
   ],
   exports: [CategoryListComponent, ProposalListComponent]
 })
