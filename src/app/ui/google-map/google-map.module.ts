@@ -1,7 +1,8 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { GoogleMapComponent } from './google-map/google-map.component';
-import { GoogleMapsModule } from '@angular/google-maps'
+import { GoogleMapsModule } from '@angular/google-maps';
+import { MatButtonModule } from '@angular/material/button';
 
 
 
@@ -10,7 +11,8 @@ import { GoogleMapsModule } from '@angular/google-maps'
   declarations: [GoogleMapComponent],
   imports: [
     CommonModule,
-    GoogleMapsModule
+    GoogleMapsModule,
+    MatButtonModule
   ],
   exports: [GoogleMapComponent]
 })

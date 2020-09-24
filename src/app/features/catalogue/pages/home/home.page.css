@@ -24,9 +24,7 @@
     text-align: center;
 }
 
-#text{
-    text-align: center;
-}
+
 
 #card{
     padding : 10px;
@@ -59,4 +57,8 @@
     #category-list > app-category-list {
         flex: 100%;
     }
+}
+
+app-google-map {
+    margin: atuo;
 }
