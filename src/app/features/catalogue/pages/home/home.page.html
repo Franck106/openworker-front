@@ -2,30 +2,31 @@
   <h1>{{title}}</h1>
 </div>
 
+<mat-card>
+  <form [formGroup]="form" (ngSubmit)="onSubmit()">
+      <mat-form-field>
+          <mat-icon>search</mat-icon>
+          <input class="md-6"
+          matInput 
+          type="string" 
+          formControlName="searchQuery"  
+          required
+          placeholder=""/>
+      </mat-form-field>
+      <button mat-button type="submit">search</button>
+  </form>
+</mat-card>
+
+<div *ngIf="proposals.length > 0">
+  <div *ngFor="let proposal of proposals">
+    <mat-card>{{proposal.name}}</mat-card>
+  </div>
+</div>
+
 <app-google-map *ngIf="proposals$ | async as proposals" [proposals]="proposals"></app-google-map>
   
 <div id="category-list" *ngIf="categories$ | async as categories">
   <app-category-list *ngFor="let category of categories" [category]="category"></app-category-list>
 </div>
 
-<div id="text">
-  <h3> Comment ça marche ?</h3>
-  <p>Openworker est une plateforme en ligne de mise en relation entre particuliers freelancers.</p>
-  <p>
-    Vous rechercher de l'aide pour un déménagement ? Vous aimeriez faire garder vos enfants ?
-    Créez votre compte gratuit en 2 minutes et entrez en contact avec des centaines d'indépendants dans votre région.
-    En quelques clics, vous trouverez l'offre et le prestataire qui vous correspondent.
-  </p>
-  <p>
-    Nous mettons en avant la confiance en assurant un suivi continu des évaluations laissées par nos utilisateurs. Les prestations assurées par le site sont soumises à un contrôle rigoureux
-    et le retour client nous semble primordial pour assurer un service de qualité.
-  </p>
-  <p>
-    L'accès à notre plateforme est totalement <b>gratuit</b> ! Nous ne prenons pas de commissions sur les versements effectués entre nos utilisateurs.
-    Nous ne faisons que nous assurer que la prestation se passe sans soucis.
-  </p>
-  <p>
-    Il est possible de bénéficier d'un <a href="">crédit d'impôt</a> sur un ensemble de services elligibles. En cas de doute,
-    vous pouvez toujours contacter notre <a href="">service commercial</a> qui vous répondra dans les 24 heures.
-  </p>
-</div>
+<app-introduction-text></app-introduction-text>

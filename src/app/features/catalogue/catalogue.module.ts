@@ -21,6 +21,7 @@ import { UserProfilePage } from './pages/user-profile/user-profile.page';
 import { AddProposalPage } from './pages/add-proposal/add-proposal.page';
 import { FeedbackPage } from './pages/feedback/feedback.page';
 import { GoogleMapModule } from '../../ui/google-map/google-map.module';
+import { IntroductionModule } from '../../ui/introduction/introduction.module';
 
 
 @NgModule({
@@ -47,7 +48,8 @@ import { GoogleMapModule } from '../../ui/google-map/google-map.module';
     MatSelectModule,
     MatInputModule,
     ReactiveFormsModule,
-    GoogleMapModule
+    GoogleMapModule,
+    IntroductionModule
   ],
   exports: [CategoryListComponent, ProposalListComponent]
 })

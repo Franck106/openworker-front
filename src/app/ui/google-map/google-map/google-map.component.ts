@@ -14,10 +14,10 @@ export class GoogleMapComponent implements OnInit {
   @Input() zoom = 12;
   @Input() center: google.maps.LatLngLiteral;
   options: google.maps.MapOptions = {
-    mapTypeId: 'hybrid',
-    zoomControl: false,
+    mapTypeId: 'roadmap',
+    zoomControl: true,
     scrollwheel: false,
-    disableDoubleClickZoom: false,
+    disableDoubleClickZoom: true,
     maxZoom: 15,
     minZoom: 8,
   }
@@ -53,13 +53,5 @@ export class GoogleMapComponent implements OnInit {
   //     options: { animation: google.maps.Animation.BOUNCE },
   //   })
   // }
-
-  zoomIn() {
-    if (this.zoom < this.options.maxZoom!) this.zoom++
-  }
-
-  zoomOut() {
-    if (this.zoom > this.options.minZoom!) this.zoom--
-  }
 
 }

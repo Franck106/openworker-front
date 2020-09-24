@@ -18,6 +18,10 @@ export class CatalogueService {
     return this.http.get<Proposal[]>(`${environment.apiUrl}/api/proposals`);
   }
 
+  getProposalsById(id:number): Observable<Proposal> {
+    return this.http.get<Proposal>(`${environment.apiUrl}/api/proposal/`+ id);
+  }
+
   getProposalsForCategories(categories: Category[]): Observable<Proposal[]> {
     return this.http
       .post<ProposalSearchResponse>(
