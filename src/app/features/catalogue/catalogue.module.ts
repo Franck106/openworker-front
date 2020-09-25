@@ -10,6 +10,8 @@ import { MatFormFieldModule} from '@angular/material/form-field';
 import { MatSelectModule} from '@angular/material/select';
 import { MatInputModule} from '@angular/material/input';
 import { ReactiveFormsModule } from '@angular/forms';
+import {MatBadgeModule} from '@angular/material/badge'; 
+import { MatSnackBarModule } from "@angular/material/snack-bar";
 
 import { CatalogueRoutingModule } from './catalogue-routing.module';
 import { ProposalsPage } from './pages/proposals/proposals.page';
@@ -49,7 +51,9 @@ import { IntroductionModule } from '../../ui/introduction/introduction.module';
     MatInputModule,
     ReactiveFormsModule,
     GoogleMapModule,
-    IntroductionModule
+    IntroductionModule,
+    MatBadgeModule,
+    MatSnackBarModule
   ],
   exports: [CategoryListComponent, ProposalListComponent]
 })
