@@ -37,7 +37,7 @@ export class AddProposalPage implements OnInit {
   }
 
   onSubmit(): void {
-    console.warn(this.form.value);
+    //console.warn(this.form.value);
     const proposal: Proposal = {
       name: this.form.value.name,
       description: this.form.value.description,
@@ -47,7 +47,6 @@ export class AddProposalPage implements OnInit {
       maxDistance: this.form.value.maxDistance,
       date: new Date(),
     };
-    console.log(proposal);
     this.catalogue.addProposal(proposal).subscribe((response) => {
       if (response == null) {
         console.error('Server error');

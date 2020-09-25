@@ -5,8 +5,8 @@
 export const environment = {
   production: false,
   /* Without ending slash */
-  apiUrl: 'http://localhost:5000',
-  orchestraUrl: 'http://localhost:8585',
+  apiUrl: 'http://Catalogue-env.eba-azp7e8aa.eu-west-3.elasticbeanstalk.com', //'http://localhost:5000',
+  orchestraUrl: 'http://localhost:3000',
   elasticUrl: 'http://localhost:9200/proposals/_search?q=',
 };
 
