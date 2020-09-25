@@ -12,7 +12,6 @@ import { map, switchMap, tap } from 'rxjs/operators';
 export class ProposalsPage implements OnInit {
   
   proposals$: Observable<Proposal[]>;
-  categoryId: any;
 
   constructor(private catalogue: CatalogueService,
     private route: ActivatedRoute) { }

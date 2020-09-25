@@ -1,20 +1,35 @@
 <article>
-    <mat-card>
-        <a [routerLink]="['../../user', proposal.provider.id]">
-            <img [src]="proposal.provider.image || './assets/images/default.png'"
-                [alt]="proposal.provider.firstName"
-                mat-card-image
-                loading="lazy"/>
-        </a>
-        <mat-card-title>
-            <a [routerLink]="['../../user', proposal.provider.id]">{{proposal.provider.firstName}} {{proposal.provider.lastName}}</a>
-        </mat-card-title>
-        <mat-card-content>
-            <mat-icon aria-hidden="false" aria-label="city">home</mat-icon>
-            <p>{{proposal.provider.city}}</p>
-            <div class="proposal-decription">{{proposal.description}}</div>
-            <p>{{proposal.provider.globalRating}}</p>
-            <p>{{proposal.price | currency:'EUR'}}</p>
-        </mat-card-content>
-    </mat-card>
+  <mat-card>
+    <a [routerLink]="['../../user', proposal.provider.id]">
+      <img
+        [src]="proposal.provider.image || './assets/images/default.png'"
+        [alt]="proposal.provider.firstName"
+        mat-card-image
+        loading="lazy"
+      />
+    </a>
+    <mat-card-title>
+      <a [routerLink]="['../../user', proposal.provider.id]"
+        >{{ proposal.provider.firstName }} {{ proposal.provider.lastName }}</a
+      >
+    </mat-card-title>
+    <mat-card-subtitle>
+      <mat-icon class="material-icons color_yellow">star</mat-icon>
+      <label class="space-right">{{ proposal.provider.globalRating | number: '1.0-1' }}</label>
+      <strong>{{proposal.name}}</strong>
+    </mat-card-subtitle>
+    <mat-card-content>
+      <div>
+        <mat-icon
+          class="material-icons color_grey"
+          aria-hidden="false"
+          aria-label="city"
+          >home</mat-icon
+        >
+        <strong>{{ proposal.provider.city }}</strong>
+      </div>
+      <div class="proposal-decription">{{ proposal.description }}</div>
+      <p>{{ proposal.price | currency: 'EUR':'symbol' }}</p>
+    </mat-card-content>
+  </mat-card>
 </article>

@@ -3,6 +3,7 @@ import {
   FormBuilder,
   Validators,
 } from '@angular/forms';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { SimpleAuthenticationService } from 'src/app/features/authentication/services/simple-authentication.service';
@@ -30,6 +31,7 @@ export class AddProposalPage implements OnInit {
     private formBuilder: FormBuilder,
     private router: Router,
     private auth: SimpleAuthenticationService,
+    private snackbar: MatSnackBar
   ) {}
 
   ngOnInit(): void {
@@ -37,7 +39,7 @@ export class AddProposalPage implements OnInit {
   }
 
   onSubmit(): void {
-    //console.warn(this.form.value);
+    const loading = this.snackbar.open('Enregistrement en cours...');
     const proposal: Proposal = {
       name: this.form.value.name,
       description: this.form.value.description,
@@ -48,11 +50,13 @@ export class AddProposalPage implements OnInit {
       date: new Date(),
     };
     this.catalogue.addProposal(proposal).subscribe((response) => {
+      loading.dismiss();
       if (response == null) {
         console.error('Server error');
       } else {
         console.log(response);
-        this.router.navigateByUrl('/');
+        this.snackbar.open('Service ajouté !', 'Ok', { duration: 3000 });
+        this.router.navigateByUrl('/user/activity');
       }
     });
   }

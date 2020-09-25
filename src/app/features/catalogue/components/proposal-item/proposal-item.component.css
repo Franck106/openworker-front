@@ -1,9 +1,21 @@
 article {
-    margin: 20px;
+  margin: 20px;
 }
 
 .proposal-decription {
-    max-height: 30%;
-    overflow: hidden;
+  max-height: 30%;
+  overflow: hidden;
 }
 
+.material-icons.color_yellow {
+  color: yellow;
+}
+
+.material-icons.color_grey {
+  color: #bccbda;
+}
+
+.space-right {
+    margin-right: 20px;
+    margin-left: 5px;
+}
