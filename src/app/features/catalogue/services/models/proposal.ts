@@ -10,5 +10,6 @@ export interface Proposal {
     category: Category,
     provider: User,
     maxDistance: number,
-    date: Date
+    date: Date,
+    score?: number
 }
