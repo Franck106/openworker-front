@@ -65,7 +65,7 @@ export class CatalogueService {
     console.log(proposal);
     return this.http
       .post<Proposal>(`${environment.apiUrl}/api/proposals`, proposal)
-      .pipe(tap((response) => console.log('Service : ' + response)));
+      .pipe(tap((response) => console.log(response)));
   }
 
   getPrestationById(id: number): Observable<Prestation> {
@@ -79,6 +79,7 @@ export class CatalogueService {
         customerRating: rating,
       });
   }
+
 }
 
 interface ProposalSearchResponse {

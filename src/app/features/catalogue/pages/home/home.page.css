@@ -62,3 +62,15 @@
 app-google-map {
     margin: atuo;
 }
+
+
+
+
+#elastic-results {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+#elastic-results > app-proposal-item {
+    flex: calc(100% / 3);
+}
