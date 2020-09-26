@@ -1,34 +1,35 @@
 <article>
-  <mat-card>
+  <div class="category-name">{{proposal.name}}</div>
+  <div class="card" [class.premium-user]="proposal.provider.premium">
     <a [routerLink]="['../../user', proposal.provider.id]">
-      <img
+      <img class="profile-picture"
         [src]="'./assets/images/' + (proposal.provider.image || 'default.jpg')"
-        [alt]="proposal.provider.firstName"
-        mat-card-image
-      />
+        [alt]="proposal.provider.firstName" />
     </a>
-    <mat-card-title>
-      <a [routerLink]="['../../user', proposal.provider.id]"
-        >{{ proposal.provider.firstName }} {{ proposal.provider.lastName }}</a
-      >
-    </mat-card-title>
-    <mat-card-subtitle>
-      <mat-icon class="material-icons color_yellow">star</mat-icon>
-      <label class="space-right">{{ proposal.provider.globalRating | number: '1.0-1' }}</label>
-      <strong>{{proposal.name}}</strong>
-    </mat-card-subtitle>
-    <mat-card-content>
-      <div>
+    <div class="card-title">
+      <a [routerLink]="['../../user', proposal.provider.id]">
+        {{ proposal.provider.firstName }} {{ proposal.provider.lastName }}
+      </a>
+    </div>
+    <div class="ratings">
+      <app-one-star-rating
+              [ratings]="proposal.provider.globalRating"
+              [fontSize]="14">
+      </app-one-star-rating>
+    </div>
+    <div class="card-body">
+      <div class="user-city">
         <mat-icon
           class="material-icons color_grey"
           aria-hidden="false"
-          aria-label="city"
-          >home</mat-icon
-        >
+          aria-label="city">home</mat-icon>
         <strong>{{ proposal.provider.city }}</strong>
       </div>
       <div class="proposal-decription">{{ proposal.description }}</div>
-      <p>{{ proposal.price | currency: 'EUR':'symbol' }}</p>
-    </mat-card-content>
-  </mat-card>
+      <div class="price">
+        {{ proposal.price | currency: 'EUR':'symbol' }}
+        <span class="price-detail">/ heure</span>
+      </div>
+    </div>
+  </div>
 </article>
