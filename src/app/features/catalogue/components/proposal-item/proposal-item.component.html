@@ -1,40 +1,43 @@
-<article>
-  <div class="category-name">{{proposal.name}}</div>
-  <div class="card" [class.premium-user]="proposal.provider.premium">
+<mat-card class="article">
+  <a [routerLink]="['../../user', proposal.provider.id]" class="image-link">
+    <img
+      [src]="proposal.provider.image || './assets/images/default.png'"
+      [alt]="proposal.provider.firstName"
+      mat-card-image
+      loading="lazy"
+      class="image"
+    />
+  </a>
+  <mat-card-title>
     <a [routerLink]="['../../user', proposal.provider.id]">
-      <img class="profile-picture"
-        [src]="'./assets/images/' + (proposal.provider.image || 'default.jpg')"
-        [alt]="proposal.provider.firstName" />
+      {{ proposal.provider.firstName }} {{ proposal.provider.lastName }}
     </a>
-    <div class="card-title">
-      <a [routerLink]="['../../user', proposal.provider.id]">
-        {{ proposal.provider.firstName }} {{ proposal.provider.lastName }}
-      </a>
+  </mat-card-title>
+  <mat-card-subtitle>
+    <strong>{{ proposal.name }}</strong>
+  </mat-card-subtitle>
+  <div class="ratings">
+    <app-one-star-rating
+      [ratings]="proposal.provider.globalRating"
+      [fontSize]="14"
+    >
+    </app-one-star-rating>
+  </div>
+  <mat-card-content>
+    <div>
+      <mat-icon
+        class="material-icons color_grey"
+        aria-hidden="false"
+        aria-label="city"
+        >home</mat-icon
+      >
+      <strong>{{ proposal.provider.city }}</strong>
     </div>
-    <div class="ratings">
-      <app-one-star-rating
-              [ratings]="proposal.provider.globalRating"
-              [fontSize]="14">
-      </app-one-star-rating>
-    </div>
-    <div class="card-body">
-      <div class="user-city">
-        <mat-icon
-          class="material-icons color_grey"
-          aria-hidden="false"
-          aria-label="city">home</mat-icon>
-        <strong>{{ proposal.provider.city }}</strong>
-      </div>
-      <div class="proposal-description">{{ proposal.description }}</div>
-      <div class="price">
-        {{ proposal.price | currency: 'EUR':'symbol' }}
-        <span class="price-detail">/ heure</span>
-      </div>
-
+    <div class="proposal-decription">{{ proposal.description }}</div>
+    <p>{{ proposal.price | currency: 'EUR':'symbol' }}</p>
+  </mat-card-content>
       <div *ngIf="showContactButton" class="text-center mt-2">
         <button class="btn btn-outline-primary"
           (click)="contactClicked(proposal)">Contacter</button>
       </div>
-    </div>
-  </div>
-</article>
+</mat-card>
