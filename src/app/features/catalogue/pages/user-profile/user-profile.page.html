@@ -1,35 +1,37 @@
-
- <div id="titre">
-  <h2>Profil</h2>
+<div id="titre">
+    <h2>Profil</h2>
 </div>
-
 
 <div id="main" *ngIf="(provider | async) as user">
 
     <div class="user-card {{user.premium ? 'premium-card' : ''}}" style="width: 30rem;">
-          <div>
-              <img src="{{user.image}}" class="profile-picture" alt="">
-              <h5 class="mt-3 card-title">{{user.firstName}} {{user.lastName}}</h5>
-              <p class="card-text">{{user.postCode}} {{user.city}}</p>
-          </div>
-            <span class="ratings-container">Note des utilisateurs
+        <div>
+            <img src="{{user.image}}" class="profile-picture" alt="">
+            <h5 class="mt-3 card-title">{{user.firstName}} {{user.lastName}}</h5>
+            <p class="card-text">{{user.postCode}} {{user.city}}</p>
+        </div>
+        <span class="ratings-container">Note des utilisateurs
                 <img class="user-star" src="assets/images/star.png" alt="">
-                <span class="user-ratings">{{user.globalRating}}</span>
+                <span class="user-ratings">{{user.globalRating | number : '1.1-1'}}</span>
             </span>
     </div>
 
-
-  
-    <div class="chat-box">
-          <h4>Contacter</h4>
-              <div class="input-group">
-                  <textarea class="form-control" style="width: max-content;"></textarea>
-              </div>
-                <span class="badge badge-info" id="msg"></span>
-                  <p class="small mt-1" style="color:grey">Cette messagerie instantanée est privée. Seuls votre interlocuteur et vous pourront lire les messages échangés.
-                  Veuillez rester courtois et respectueux lors de vos échanges. <a href="">Signalez</a> tout éventuel comportement incorrect.</p>
+    <div class="chat-box-section" *ngIf="myUserId != userId">
+        <h4 *ngIf="provider | async as prov">Contacter {{prov?.firstName}} {{prov?.lastName}}</h4>
+        <div *ngIf="shouldShowChatBox; else chatBoxHidden">
+            <div #chatBox class="chat-box-container"></div>
+        </div>
+        <span class="badge badge-info" id="msg"></span>
+        <p class="small mt-1" style="color:grey">Cette messagerie instantanée est privée. Seuls votre interlocuteur et
+            vous pourront lire les messages échangés.
+            Veuillez rester courtois et respectueux lors de vos échanges. <a href="">Signalez</a> tout éventuel
+            comportement incorrect.</p>
     </div>
-    
-
 </div>
-      
+
+<ng-template #chatBoxHidden>
+    <div *ngIf="myUserId == null" class="chat-box-placeholder">
+        <p>Vous devez être connecté(e) pour accéder à la messagerie en directe.</p>
+        <p><a routerLink="/auth/signup">Créer mon compte.</a></p>
+    </div>
+</ng-template>
