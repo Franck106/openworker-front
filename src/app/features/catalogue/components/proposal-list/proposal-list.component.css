@@ -5,15 +5,17 @@
     }
     #proposal-list > app-proposal-item {
         flex: calc(100% / 3);
+        max-width: calc(100% / 3);
     }
 }
 
-@media all and (max-width: 459px) {
+@media all and (max-width: 600px) {
     #proposal-list {
         flex-direction: column;
         flex-wrap: nowrap;
     }
     #proposal-list > app-proposal-item {
         flex: 100%;
+        max-width: inherit;
     }
 }
