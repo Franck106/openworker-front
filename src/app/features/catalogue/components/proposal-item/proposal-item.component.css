@@ -2,8 +2,8 @@ article {
     margin: 20px;
 }
 
-.proposal-decription {
-    height: 100px;
+.proposal-description {
+    height: 80px;
     overflow: auto;
     font-size: smaller;
 }

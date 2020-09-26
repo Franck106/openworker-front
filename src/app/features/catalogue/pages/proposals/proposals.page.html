@@ -7,7 +7,9 @@
         <app-category-selector (categoryChanged)="handleCategoryChange($event)"></app-category-selector>
     </div>
     <app-proposal-list *ngIf="proposals$ | async as proposals; else proposalsLoading"
-        [proposals]="proposals"></app-proposal-list>
+        [proposals]="proposals"
+        [showContactButtons]="true">
+    </app-proposal-list>
     <ng-template #proposalsLoading>
         <div class="center">
             <mat-progress-spinner mode="indeterminate"></mat-progress-spinner>

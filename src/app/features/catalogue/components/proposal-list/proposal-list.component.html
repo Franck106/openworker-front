@@ -1,8 +1,6 @@
 <div id="proposal-list">
     <app-proposal-item *ngFor="let proposal of proposals"
-        [proposal]="proposal"></app-proposal-item>
-<!--    <mat-paginator [length]="50"-->
-<!--        [pageSize]="9"-->
-<!--        [pageSizeOptions]="[3,9,36]"-->
-<!--    ></mat-paginator>-->
+        [proposal]="proposal"
+        [showContactButton]="showContactButtons">
+    </app-proposal-item>
 </div>

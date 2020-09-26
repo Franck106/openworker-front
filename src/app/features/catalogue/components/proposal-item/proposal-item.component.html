@@ -25,10 +25,15 @@
           aria-label="city">home</mat-icon>
         <strong>{{ proposal.provider.city }}</strong>
       </div>
-      <div class="proposal-decription">{{ proposal.description }}</div>
+      <div class="proposal-description">{{ proposal.description }}</div>
       <div class="price">
         {{ proposal.price | currency: 'EUR':'symbol' }}
         <span class="price-detail">/ heure</span>
+      </div>
+
+      <div *ngIf="showContactButton" class="text-center mt-2">
+        <button class="btn btn-outline-primary"
+          (click)="contactClicked(proposal)">Contacter</button>
       </div>
     </div>
   </div>

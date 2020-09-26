@@ -81,7 +81,7 @@ export class SimpleAuthenticationService {
     let value = null;
     try {
       const item = localStorage.getItem('userLoggedIn');
-      console.log('item:' + item);
+      // console.log('item:' + item);
       value = item ? JSON.parse(item) : null;
     } catch(err) {
       value = null;
