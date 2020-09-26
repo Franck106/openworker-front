@@ -1,0 +1,27 @@
+
+:host {
+    display: block;
+    height: 20px;
+}
+
+img.user-star {
+    height: 100%;
+}
+
+span.user-ratings {
+    font-weight: bold;
+    transform: translate(-120%, 30%);
+    position: absolute;
+    color: black;
+}
+
+.ratings-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: 6px;
+    border: 1px solid lightgrey;
+    border-radius: 4px;
+    margin-top: 12px;
+}

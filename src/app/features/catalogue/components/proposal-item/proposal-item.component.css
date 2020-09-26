@@ -1,21 +1,92 @@
 article {
-  margin: 20px;
+    margin: 20px;
 }
 
 .proposal-decription {
-  max-height: 30%;
-  overflow: hidden;
+    height: 100px;
+    overflow: auto;
+    font-size: smaller;
 }
 
 .material-icons.color_yellow {
-  color: yellow;
+    color: yellow;
 }
 
 .material-icons.color_grey {
-  color: #bccbda;
+    color: #bccbda;
 }
 
 .space-right {
     margin-right: 20px;
     margin-left: 5px;
+}
+
+.profile-picture {
+    width: 100%;
+    margin: 0;
+}
+
+.card {
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    border-radius: 8px;
+    padding: 0;
+    overflow: hidden;
+}
+
+a {
+    padding: 0;
+}
+
+.card-body {
+    padding: 16px;
+}
+
+.card-title {
+    font-size: large;
+    text-align: center;
+    font-weight: bolder;
+    margin-top: 10px;
+}
+
+.premium-user {
+    border-color: gold;
+    box-shadow: 0 0 3px 0 gold;
+}
+
+.category-name {
+    font-size: 13px;
+    position: absolute;
+    z-index: 100;
+    background: linear-gradient(45deg, #3c948a, #7656c4);
+    color: white;
+    border-radius: 4px;
+    padding: 1px 6px;
+    transform: translate(11px, -10px);
+    cursor: default;
+}
+
+.ratings {
+    text-align: center;
+    margin-top: 0;
+    transform: translate(0, -15px);
+    height: 0;
+}
+
+.user-city {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    margin-bottom: 10px;
+}
+
+.price {
+    text-align: center;
+    font-size: large;
+}
+
+.price-detail {
+    font-size: small;
+    color: grey;
 }

@@ -6,8 +6,7 @@
             <p class="card-text">{{user.postCode}} {{user.city}}</p>
         </div>
         <span class="ratings-container">Note des utilisateurs
-            <img class="user-star" src="assets/images/star.png" alt="">
-            <span class="user-ratings">{{user.globalRating | number : '1.1-1'}}</span>
+            <app-one-star-rating [ratings]="user.globalRating"></app-one-star-rating>
         </span>
     </div>
 
