@@ -18,8 +18,8 @@ export class CatalogueService {
     return this.http.get<Proposal[]>(`${environment.apiUrl}/api/proposals`);
   }
 
-  getProposalsById(id:number): Observable<Proposal> {
-    return this.http.get<Proposal>(`${environment.apiUrl}/api/proposal/`+ id);
+  getProposalById(id: number): Observable<Proposal> {
+    return this.http.get<Proposal>(`${environment.apiUrl}/api/proposals/${id}`);
   }
 
   getProposalsForCategories(categories: Category[]): Observable<Proposal[]> {
@@ -46,7 +46,7 @@ export class CatalogueService {
     return this.getCategories().pipe(
       map(
         (categories) =>
-          categories.find((category) => category.id == categoryId)?.categories,
+          categories.find((category) => category.id === categoryId)?.categories,
       ),
     );
   }
@@ -57,7 +57,7 @@ export class CatalogueService {
 
   getUserById(userId: number): Observable<User | undefined> {
     return this.getUsers().pipe(
-      map((users) => users.find((user) => user.id == userId)),
+      map((users) => users.find((user) => user.id === userId)),
     );
   }
 
@@ -80,6 +80,21 @@ export class CatalogueService {
       });
   }
 
+  addPrestation(proposalId: number, customerId: number): Observable<Prestation> {
+    const body = {
+      delivered: false,
+      cancelled: false,
+      valide: false,
+      proposal: {
+        id: proposalId,
+      },
+      customer: {
+        id: customerId,
+      }
+    };
+
+    return this.http.post<Prestation>(`${environment.apiUrl}/api/prestation`, body);
+  }
 }
 
 interface ProposalSearchResponse {

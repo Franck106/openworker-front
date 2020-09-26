@@ -163,4 +163,28 @@ nav {
   
     /* Support for IE. */
     font-feature-settings: "liga";
-  }
+}
+
+/* Buttons */
+
+
+.btn-primary:not(:disabled):not(.disabled), .btn-primary:not(:disabled):not(.disabled):active, .show>.btn-primary.dropdown-toggle,
+.btn-primary:not(:disabled):not(.disabled).active, .btn-primary:not(:disabled):not(.disabled):active, .show>.btn-primary.dropdown-toggle {
+    color: #fff;
+    background-color: #6765b5 !important;
+    border-color: #706b79 !important;
+}
+
+button.btn-outline-primary {
+    color: #6765b5;
+    border-color: #6765b5;
+}
+
+button.btn-outline-primary:not(:disabled):not(.disabled):hover,
+button.btn-outline-primary:not(:disabled):not(.disabled).active,
+button.btn-outline-primary:not(:disabled):not(.disabled):active,
+.show>.buttonbtn-outline-primary.dropdown-toggle {
+    color: #fff;
+    background-color: #6765b5;
+    border-color: #6765b5;
+}

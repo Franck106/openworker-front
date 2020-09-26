@@ -11,6 +11,8 @@ export class ProposalListComponent implements OnInit {
 
   @Input() proposals: ReadonlyArray<Proposal> | null;
 
+  @Input() showContactButtons: boolean;
+
   constructor() { }
 
   ngOnInit(): void {
