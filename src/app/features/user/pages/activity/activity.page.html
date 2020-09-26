@@ -59,8 +59,8 @@
             <div class="col-sm">{{formatDate(prestation.endDate)}}</div>
             <div class="col-sm">{{prestation.proposal.price}} €</div>
             <div class="col-sm">
-                <ng-container *ngIf="prestation.providerRating && ! prestation.cancelled; else conclude">
-                    <app-five-star-rating [ratings]="prestation.providerRating"></app-five-star-rating>
+                <ng-container *ngIf="prestation.customerRating && ! prestation.cancelled; else conclude">
+                    <app-five-star-rating [ratings]="prestation.customerRating"></app-five-star-rating>
                 </ng-container>
                 <ng-template #conclude>
                     <ng-container *ngIf="prestation.cancelled ; else concludeLink">
