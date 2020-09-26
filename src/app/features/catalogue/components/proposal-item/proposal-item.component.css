@@ -1,5 +1,21 @@
-article {
-    margin: 20px;
+.article {
+  /* margin: 20px; */
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  height: 100%;
+}
+
+.image-link {
+  align-self: center;
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  padding: 5%;
+}
+
+.image {
+  width: 100%;
 }
 
 .proposal-description {

@@ -4,16 +4,18 @@
 
 <mat-card>
   <form [formGroup]="form" (ngSubmit)="onSubmit()">
-      <mat-form-field>
-          <mat-icon>search</mat-icon>
-          <input class="md-6"
-          matInput 
-          type="string" 
-          formControlName="searchQuery"  
-          required
-          placeholder=""/>
-      </mat-form-field>
-      <button mat-button type="submit">search</button>
+    <mat-form-field>
+      <mat-icon>search</mat-icon>
+      <input
+        class="md-6"
+        matInput
+        type="string"
+        formControlName="searchQuery"
+        required
+        placeholder=""
+      />
+    </mat-form-field>
+    <button mat-button type="submit">search</button>
   </form>
 </mat-card>
 
@@ -23,10 +25,18 @@
   </div>
 </div>
 
-<app-google-map *ngIf="proposals$ | async as proposals" [proposals]="proposals"></app-google-map>
-  
 <div id="category-list" *ngIf="categories$ | async as categories">
-  <app-category-list *ngFor="let category of categories" [category]="category"></app-category-list>
+  <app-category-list
+    *ngFor="let category of categories"
+    [category]="category"
+  ></app-category-list>
+</div>
+<div id="map">
+  <app-google-map
+    *ngIf="proposals$ | async as proposals"
+    [proposals]="proposals"
+    [connectedUser]="connectedUser"
+  ></app-google-map>
 </div>
 
 <app-introduction-text></app-introduction-text>

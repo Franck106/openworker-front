@@ -20,29 +20,29 @@ export class UserProfilePage implements OnInit {
   messageUnderChat: string;
   proposalId: number;
 
-  @ViewChild('chatBox')
-  set chatBox(elem: ElementRef) {
-    if (!! elem) {
-      this.myUserId = this.auth.getConnectedUser().id || -1;
-      const chatBoxModel = createChatBox(elem.nativeElement, this.myUserId.toString(), this.userId.toString());
+  // @ViewChild('chatBox')
+  // set chatBox(elem: ElementRef) {
+  //   if (!! elem) {
+  //     this.myUserId = this.auth.getConnectedUser().id || -1;
+  //     const chatBoxModel = createChatBox(elem.nativeElement, this.myUserId.toString(), this.userId.toString());
 
-      chatBoxModel.listeners.push({
-        onmessagesent: () => this.catalogue.addPrestation(this.proposalId, this.myUserId)
-          .subscribe(
-          () => {
-            this.messageUnderChat = 'Votre demande a bien été envoyée !';
-            this.cdr.detectChanges();
-          }
-        ),
-      });
+  //     chatBoxModel.listeners.push({
+  //       onmessagesent: () => this.catalogue.addPrestation(this.proposalId, this.myUserId)
+  //         .subscribe(
+  //         () => {
+  //           this.messageUnderChat = 'Votre demande a bien été envoyée !';
+  //           this.cdr.detectChanges();
+  //         }
+  //       ),
+  //     });
 
-      const textArea = document.querySelector('.scb-input-area textarea');
+  //     const textArea = document.querySelector('.scb-input-area textarea');
 
-      if (textArea) {
-        textArea.textContent = this.prefilledMessage;
-      }
-    }
-  }
+  //     if (textArea) {
+  //       textArea.textContent = this.prefilledMessage;
+  //     }
+  //   }
+  // }
 
   provider: Observable<User | undefined>;
 
@@ -68,13 +68,13 @@ export class UserProfilePage implements OnInit {
       ).subscribe(([provider, proposal]) => {
         this.prefilledMessage = `Bonjour ${provider?.firstName}, je suis intéressé(e) par contre annonce "${proposal.name}" (#${proposal.id}).`;
 
-        if (this.chatBox != null) {
-          const textArea = document.querySelector('.scb-input-area textarea');
+        // if (this.chatBox != null) {
+        //   const textArea = document.querySelector('.scb-input-area textarea');
 
-          if (textArea) {
-            textArea.textContent = this.prefilledMessage;
-          }
-        }
+        //   if (textArea) {
+        //     textArea.textContent = this.prefilledMessage;
+        //   }
+        // }
 
         this.messageUnderChat = `En envoyant ce message, une demande sera enregistrée pour l'annonce #${proposal.id}.`;
       });
