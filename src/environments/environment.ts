@@ -6,7 +6,7 @@ export const environment = {
   production: false,
   /* Without ending slash */
   apiUrl: 'http://localhost:5000',
-  orchestraUrl: 'http://localhost:3000',
+  orchestraUrl: 'http://localhost:8585',
   elasticUrl: 'http://localhost:9200/proposals/_search?q=',
 };
 
