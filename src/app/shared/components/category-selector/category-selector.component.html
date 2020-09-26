@@ -1,0 +1,19 @@
+<div *ngIf="categories$ | async as categories">
+    <div>
+        <span *ngFor="let category of categories"
+              class="toggable-category"
+              (click)="toggleCategory(category)"
+              [class.checked]="isToggled(category)">
+            {{category.name}}
+        </span>
+    </div>
+
+    <div class="sub-categories">
+        <span *ngFor="let category of subCategories"
+              class="toggable-category"
+              [class.checked]="isToggled(category)"
+              (click)="toggleSubCategory(category)">
+            {{category.name}}
+        </span>
+    </div>
+</div>
