@@ -3,6 +3,7 @@ import {CatalogueService} from '../../../features/catalogue/services/catalogue.s
 import {Observable} from 'rxjs';
 import {Category} from '../../../features/catalogue/services/models/category';
 import {tap} from 'rxjs/operators';
+import {ActivatedRoute} from '@angular/router';
 
 @Component({
   selector: 'app-category-selector',
@@ -21,14 +22,14 @@ export class CategorySelectorComponent implements OnInit {
   @Output()
   categoryChanged = new EventEmitter<Category[]>();
 
-  constructor(private catalogueService: CatalogueService) {
+  constructor(private catalogueService: CatalogueService,
+              private route: ActivatedRoute) {
     this.categories$ = catalogueService.getCategories().pipe(
       tap(categories => {
-        const sub = categories[0]?.categories  || [];
-        this.activeCategories = [
-          1,
-          ...sub.map(c => c.id)];
-
+        const currentMainCategoryId = parseInt(this.route.snapshot.paramMap.get('id') || '1', 10);
+        const currentMainCategory = categories.find(cat => cat.id === currentMainCategoryId) || categories[0];
+        const sub = currentMainCategory?.categories  || [];
+        this.activeCategories = [currentMainCategoryId, ...sub.map(c => c.id)];
         this.subCategories = sub;
       })
     );
