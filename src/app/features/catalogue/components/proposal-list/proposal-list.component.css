@@ -2,6 +2,7 @@
     #proposal-list {
         display: flex;
         flex-wrap: wrap;
+        justify-content: center;
     }
     #proposal-list > app-proposal-item {
         flex: calc(100% / 3);

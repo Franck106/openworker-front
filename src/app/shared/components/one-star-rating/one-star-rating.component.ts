@@ -8,7 +8,7 @@ import {Component, Input, OnInit} from '@angular/core';
 export class OneStarRatingComponent implements OnInit {
 
   @Input()
-  ratings: number;
+  ratings?: number;
 
   @Input()
   fontSize = 18;

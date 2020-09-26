@@ -1,7 +1,11 @@
-<div >
+<div>
     <mat-toolbar>
         <span>Les Services</span>
     </mat-toolbar>
+    <div class="filters">
+        <h4>Je recherche...</h4>
+        <app-category-selector (categoryChanged)="handleCategoryChange($event)"></app-category-selector>
+    </div>
     <app-proposal-list *ngIf="proposals$ | async as proposals; else proposalsLoading"
         [proposals]="proposals"></app-proposal-list>
     <ng-template #proposalsLoading>
