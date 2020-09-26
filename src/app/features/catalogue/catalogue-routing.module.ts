@@ -8,6 +8,7 @@ import { FeedbackPage } from './pages/feedback/feedback.page';
 
 const routes: Routes = [
   { path: 'proposals', component: ProposalsPage },
+  { path: 'proposals/:id', component: ProposalsPage },
   { path: 'home', component: HomePage },
   { path: 'add-proposal', component: AddProposalPage },
   { path: 'feedback/:id', component: FeedbackPage },
