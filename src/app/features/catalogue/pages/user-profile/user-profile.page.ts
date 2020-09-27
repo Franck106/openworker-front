@@ -5,6 +5,9 @@ import {ActivatedRoute} from '@angular/router';
 import {Observable} from 'rxjs';
 import {SimpleAuthenticationService} from '../../../authentication/services/simple-authentication.service';
 import {take, withLatestFrom} from 'rxjs/operators';
+import {ChatBoxModel} from '../../../../shared/chat-box-model';
+
+declare var createChatBox: (rootElement: HTMLElement | null, sourceId: string, targetId: string) => ChatBoxModel;
 
 @Component({
   templateUrl: './user-profile.page.html',
@@ -20,29 +23,29 @@ export class UserProfilePage implements OnInit {
   messageUnderChat: string;
   proposalId: number;
 
-  // @ViewChild('chatBox')
-  // set chatBox(elem: ElementRef) {
-  //   if (!! elem) {
-  //     this.myUserId = this.auth.getConnectedUser().id || -1;
-  //     const chatBoxModel = createChatBox(elem.nativeElement, this.myUserId.toString(), this.userId.toString());
+  @ViewChild('chatBox')
+  set chatBox(elem: ElementRef) {
+    if (!! elem) {
+      this.myUserId = this.auth.getConnectedUser().id || -1;
+      const chatBoxModel = createChatBox(elem.nativeElement, this.myUserId.toString(), this.userId.toString());
 
-  //     chatBoxModel.listeners.push({
-  //       onmessagesent: () => this.catalogue.addPrestation(this.proposalId, this.myUserId)
-  //         .subscribe(
-  //         () => {
-  //           this.messageUnderChat = 'Votre demande a bien été envoyée !';
-  //           this.cdr.detectChanges();
-  //         }
-  //       ),
-  //     });
+      chatBoxModel.listeners.push({
+        onmessagesent: () => this.catalogue.addPrestation(this.proposalId, this.myUserId)
+          .subscribe(
+          () => {
+            this.messageUnderChat = 'Votre demande a bien été envoyée !';
+            this.cdr.detectChanges();
+          }
+        ),
+      });
 
-  //     const textArea = document.querySelector('.scb-input-area textarea');
+      const textArea = document.querySelector('.scb-input-area textarea');
 
-  //     if (textArea) {
-  //       textArea.textContent = this.prefilledMessage;
-  //     }
-  //   }
-  // }
+      if (textArea) {
+        textArea.textContent = this.prefilledMessage;
+      }
+    }
+  }
 
   provider: Observable<User | undefined>;
 
