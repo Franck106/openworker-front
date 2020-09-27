@@ -11,6 +11,9 @@ import { CatalogueService } from '../../services/catalogue.service';
 import { Category } from '../../services/models/category';
 import { Proposal } from '../../services/models/proposal';
 
+// tslint:disable-next-line:no-any
+function DBG(...args: any[]): void { console.log(...args); }
+
 @Component({
   templateUrl: './add-proposal.page.html',
   styleUrls: ['./add-proposal.page.css'],
@@ -54,7 +57,7 @@ export class AddProposalPage implements OnInit {
       if (response == null) {
         console.error('Server error');
       } else {
-        console.log(response);
+        DBG(response);
         this.snackbar.open('Service ajouté !', 'Ok', { duration: 3000 });
         this.router.navigateByUrl('/user/activity');
       }

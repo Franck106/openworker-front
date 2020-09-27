@@ -5,6 +5,11 @@ import {environment} from '../../../../environments/environment';
 import {HttpClient} from '@angular/common/http';
 import {catchError, map, tap} from 'rxjs/operators';
 
+// tslint:disable-next-line:no-any
+function DBG(...args: any[]): void {
+  // console.log(...args);
+}
+
 @Injectable({
   providedIn: 'root'
 })
@@ -38,7 +43,7 @@ export class SimpleAuthenticationService {
           if (response.error == null) {
             this._currentUser = response;
             this._currentUserSubject$.next(this._currentUser);
-            console.log('logged as ' + this._currentUser.login);
+            DBG('logged as ' + this._currentUser.login);
 
             // TODO remove
             localStorage.setItem('userLoggedIn', JSON.stringify(this._currentUser));
@@ -81,7 +86,7 @@ export class SimpleAuthenticationService {
     let value = null;
     try {
       const item = localStorage.getItem('userLoggedIn');
-      // console.log('item:' + item);
+      DBG('item:' + item);
       value = item ? JSON.parse(item) : null;
     } catch(err) {
       value = null;

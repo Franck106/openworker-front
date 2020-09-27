@@ -8,6 +8,9 @@ import { map, pluck, tap } from 'rxjs/operators';
 import { User } from './models/user';
 import {Prestation} from './models/prestation';
 
+// tslint:disable-next-line:no-any
+function DBG(...args: any[]): void { console.log(...args); }
+
 @Injectable({
   providedIn: 'root',
 })
@@ -31,7 +34,7 @@ export class CatalogueService {
         },
       )
       .pipe(
-        tap((response) => console.log(response)),
+        tap((response) => DBG(response)),
         pluck('results'),
       );
   }
@@ -62,10 +65,10 @@ export class CatalogueService {
   }
 
   addProposal(proposal: Proposal): Observable<Proposal> {
-    console.log(proposal);
+    DBG(proposal);
     return this.http
       .post<Proposal>(`${environment.apiUrl}/api/proposals`, proposal)
-      .pipe(tap((response) => console.log(response)));
+      .pipe(tap((response) => DBG(response)));
   }
 
   getPrestationById(id: number): Observable<Prestation> {

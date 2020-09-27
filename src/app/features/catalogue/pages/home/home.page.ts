@@ -9,6 +9,11 @@ import { Category } from '../../services/models/category';
 import { Proposal } from '../../services/models/proposal';
 import { User } from '../../services/models/user';
 
+// tslint:disable-next-line:no-any
+function DBG(...args: any[]): void {
+  // console.log(...args);
+}
+
 @Component({
   // selector: 'app-home',
   templateUrl: './home.page.html',
@@ -36,20 +41,20 @@ export class HomePage implements OnInit {
   ngOnInit(): void {
     this.categories$ = this.catalogue
       .getCategories()
-      .pipe(tap((categories) => console.log(categories)));
+      .pipe(tap((categories) => DBG(categories)));
     this.proposals$ = this.catalogue.getProposals();
     this.connectedUser = this.auth.getConnectedUser();
   }
 
   onSubmit() {
-    console.log('submit...');
+    DBG('submit...');
     this.proposals = [];
-    console.log(this.form.value.searchQuery);
+    DBG(this.form.value.searchQuery);
     return this.elasticSearch
       .getElasticResults(this.form.value.searchQuery)
       .subscribe((data) => {
         data.forEach((elt) => this.proposals.push(elt));
-        console.log(this.proposals);
+        DBG(this.proposals);
       });
   }
 }

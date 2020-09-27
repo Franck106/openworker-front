@@ -1,11 +1,15 @@
 import {
   Component,
   OnInit,
-  ChangeDetectionStrategy,
   Input,
 } from '@angular/core';
 import { Proposal } from 'src/app/features/catalogue/services/models/proposal';
 import { User } from 'src/app/features/catalogue/services/models/user';
+
+// tslint:disable-next-line:no-any
+function DBG(...args: any[]): void {
+  // console.log(...args);
+}
 
 @Component({
   selector: 'app-google-map',
@@ -33,7 +37,7 @@ export class GoogleMapComponent implements OnInit {
 
   ngOnInit(): void {
     navigator.geolocation.getCurrentPosition((position) => {
-      console.log(position);
+      DBG(position);
       this.center = {
         lat: position.coords.latitude,
         lng: position.coords.longitude,
@@ -48,7 +52,7 @@ export class GoogleMapComponent implements OnInit {
 
   addMarker(proposal: Proposal) {
     const location = JSON.parse(proposal.provider.geolocation!);
-    console.log(proposal);
+    DBG(proposal);
     this.markers.push({
       position: location,
       label: {
