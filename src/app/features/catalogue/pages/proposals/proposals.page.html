@@ -2,13 +2,15 @@
     <mat-toolbar>
         <span>Les Services</span>
     </mat-toolbar>
-    <div class="filters">
-        <h4>Je recherche...</h4>
+    <div class="filters form-group">
+        <h2>Je recherche...</h2>
         <app-category-selector (categoryChanged)="handleCategoryChange($event)"></app-category-selector>
 
-        <h4>Du côté de...</h4>
-        <input>
-
+        <h2>Du côté de...</h2>
+        <input class="form-control location-input"
+               placeholder="Entrez une adresse, une ville..."
+                (change)="handleLocationChange($event)"/>
+        <p>{{numResults}} annonce(s) correspondent à vos critères.</p>
         <app-google-map
             [proposals]="proposals$ | async"
             [connectedUser]="connectedUser">
