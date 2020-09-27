@@ -67,10 +67,6 @@ app-google-map {
 
 
 #elastic-results {
-    display: flex;
-    flex-wrap: wrap;
+    margin-top: 20px;
 }
 
-#elastic-results > app-proposal-item {
-    flex: calc(100% / 3);
-}

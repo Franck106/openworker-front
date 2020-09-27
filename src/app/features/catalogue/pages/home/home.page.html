@@ -19,9 +19,14 @@
   </form>
 </mat-card>
 
+
+
 <div id="elastic-results" *ngIf="proposals.length > 0">
   <div *ngFor="let proposal of proposals">
-    <app-proposal-item [proposal]="proposal"></app-proposal-item>
+    <app-proposal-list
+        [proposals]="proposals"
+        [showContactButtons]="true">
+    </app-proposal-list>
   </div>
 </div>
 

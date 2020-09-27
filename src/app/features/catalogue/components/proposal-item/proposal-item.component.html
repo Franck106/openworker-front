@@ -1,5 +1,5 @@
 <mat-card class="article">
-  <a [routerLink]="['../../user', proposal.provider.id]" class="image-link">
+  <a [routerLink]="['/catalogue/user/', proposal.provider.id]" class="image-link">
     <img
       [src]="'./assets/images/' + (proposal.provider.image || 'default.png')"
       [alt]="proposal.provider.firstName"
@@ -9,7 +9,7 @@
     />
   </a>
   <mat-card-title>
-    <a [routerLink]="['../../user', proposal.provider.id]">
+    <a [routerLink]="['/catalogue/user/', proposal.provider.id]">
       {{ proposal.provider.firstName }} {{ proposal.provider.lastName }}
     </a>
   </mat-card-title>
