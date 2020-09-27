@@ -5,6 +5,7 @@ import {Observable} from 'rxjs';
 import {ActivatedRoute} from '@angular/router';
 import {switchMap} from 'rxjs/operators';
 import {Category} from '../../services/models/category';
+import {User} from '../../services/models/user';
 
 @Component({
   templateUrl: './proposals.page.html',
@@ -13,6 +14,8 @@ import {Category} from '../../services/models/category';
 export class ProposalsPage implements OnInit {
 
   proposals$: Observable<Proposal[]>;
+
+  connectedUser: User;
 
   constructor(private catalogue: CatalogueService,
               private route: ActivatedRoute) {
