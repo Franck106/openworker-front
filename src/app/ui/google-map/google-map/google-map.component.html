@@ -1,5 +1,5 @@
 <google-map
-    height="500px"
+    height="200px"
     width="100%"
     [zoom]="zoom"
     [center]="center"
@@ -9,5 +9,6 @@
     *ngFor="let marker of markers"
     [position]="marker.position"
     [title]="marker.title"
+    (mapClick)="markerClicked($event, marker)"
 ></map-marker>
 </google-map>

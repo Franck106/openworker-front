@@ -5,6 +5,14 @@
     <div class="filters">
         <h4>Je recherche...</h4>
         <app-category-selector (categoryChanged)="handleCategoryChange($event)"></app-category-selector>
+
+        <h4>Du côté de...</h4>
+        <input>
+
+        <app-google-map
+            [proposals]="proposals$ | async"
+            [connectedUser]="connectedUser">
+        </app-google-map>
     </div>
     <app-proposal-list *ngIf="proposals$ | async as proposals; else proposalsLoading"
         [proposals]="proposals"
