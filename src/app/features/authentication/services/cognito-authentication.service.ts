@@ -8,6 +8,9 @@ import {
   CognitoUserAttribute, ISignUpResult, ICognitoUserData
 } from 'amazon-cognito-identity-js';
 
+// tslint:disable-next-line:no-any
+function DBG(...args: any[]): void { console.log(...args); }
+
 const poolData = {
   UserPoolId: '',
   ClientId: '',
@@ -37,7 +40,7 @@ export class CognitoAuthenticationService {
 
         if (!! result) {
           this.cognitoUser = result.user;
-          console.log('signUp success', result);
+          DBG('signUp success', result);
           observer.next(result.user);
           observer.complete();
         }
@@ -92,7 +95,7 @@ export class CognitoAuthenticationService {
           observer.error(err);
         }
 
-        console.log('confirmAuthCode success', result);
+        DBG('confirmAuthCode success', result);
         observer.next(result.user);
         observer.complete();
       });

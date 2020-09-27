@@ -5,6 +5,11 @@ import {User} from '../../../features/catalogue/services/models/user';
 import {Router} from '@angular/router';
 import {tap} from 'rxjs/operators';
 
+// tslint:disable-next-line:no-any
+function DBG(...args: any[]): void {
+  // console.log(...args);
+}
+
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
@@ -19,7 +24,7 @@ export class HeaderComponent implements OnInit {
               private router: Router,
               private cdr: ChangeDetectorRef) {
     this.currentUser$ = authService.currentUser$.pipe(
-        tap((user) => console.log({user})));
+        tap((user) => DBG({user})));
   }
 
   ngOnInit(): void {
