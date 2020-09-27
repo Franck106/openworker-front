@@ -1,44 +1,42 @@
-<mat-card class="article" [class.focused]="focused">
-  <div class="shadow-element" [class.on-top]="onTop"></div>
-  <a [routerLink]="['/catalogue/user/', proposal.provider.id]" class="image-link">
-    <img
-      [src]="'./assets/images/' + (proposal.provider.image || 'default.png')"
-      [alt]="proposal.provider.firstName"
-      mat-card-image
-      loading="lazy"
-      class="image"
-    />
-  </a>
-  <mat-card-title>
-    <a [routerLink]="['/catalogue/user/', proposal.provider.id]">
-      {{ proposal.provider.firstName }} {{ proposal.provider.lastName }}
+<article [class.focused]="focused">
+  <div class="shadow-element"></div>
+  <div class="pro-badge" *ngIf="proposal.provider.premium">PRO</div>
+  <div class="card" [class.premium-user]="proposal.provider.premium">
+    <a [routerLink]="['/catalogue/user', proposal.provider.id]">
+      <img class="profile-picture"
+           [src]="'./assets/images/' + (proposal.provider.image || 'default.jpg')"
+           [alt]="proposal.provider.firstName" />
     </a>
-  </mat-card-title>
-  <mat-card-subtitle>
-    <strong>{{ proposal.name }}</strong>
-  </mat-card-subtitle>
-  <div class="ratings">
-    <app-one-star-rating
-      [ratings]="proposal.provider.globalRating"
-      [fontSize]="14"
-    >
-    </app-one-star-rating>
-  </div>
-  <mat-card-content>
-    <div>
-      <mat-icon
-        class="material-icons color_grey"
-        aria-hidden="false"
-        aria-label="city"
-        >home</mat-icon
-      >
-      <strong>{{ proposal.provider.city }}</strong>
+    <div class="card-title">
+      <a [routerLink]="['/catalogue/user', proposal.provider.id]">
+        {{ proposal.provider.firstName }} {{ proposal.provider.lastName }}
+      </a>
     </div>
-    <div class="proposal-decription">{{ proposal.description }}</div>
-    <p>{{ proposal.price | currency: 'EUR':'symbol' }}</p>
-  </mat-card-content>
+    <div class="card-body">
+      <div class="ratings">
+        <app-one-star-rating
+                [ratings]="proposal.provider.globalRating"
+                [fontSize]="14">
+        </app-one-star-rating>
+      </div>
+      <div class="user-city">
+        <mat-icon
+                class="material-icons color_grey"
+                aria-hidden="false"
+                aria-label="city">home</mat-icon>
+        <strong>{{ proposal.provider.city }}</strong>
+      </div>
+      <span class="category-name">{{proposal.name}}</span>
+      <div class="proposal-description">{{ proposal.description }}</div>
+      <div class="price">
+        {{ proposal.price | currency: 'EUR':'symbol' }}
+        <span class="price-detail">/ heure</span>
+      </div>
+
       <div *ngIf="showContactButton" class="text-center mt-2">
         <button class="btn btn-outline-primary"
-          (click)="contactClicked(proposal)">Contacter</button>
+                (click)="contactClicked(proposal)">Contacter</button>
       </div>
-</mat-card>
+    </div>
+  </div>
+</article>
