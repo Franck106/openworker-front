@@ -1,4 +1,4 @@
-import {ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit} from '@angular/core';
+import {ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit, ViewChild} from '@angular/core';
 import {CatalogueService} from '../../services/catalogue.service';
 import {Proposal} from '../../services/models/proposal';
 import {Observable, of} from 'rxjs';
@@ -6,6 +6,7 @@ import {ActivatedRoute} from '@angular/router';
 import {Category} from '../../services/models/category';
 import {User} from '../../services/models/user';
 import {tap} from 'rxjs/operators';
+import {ProposalListComponent} from '../../components/proposal-list/proposal-list.component';
 
 // tslint:disable-next-line:no-any
 function DBG(...args: any[]): void {
@@ -30,6 +31,9 @@ export class ProposalsPage implements OnInit {
   private currentSearchLocation: string | null;
 
   private geocoder = new google.maps.Geocoder();
+
+  @ViewChild(ProposalListComponent)
+  proposalList: ProposalListComponent;
 
   constructor(private catalogue: CatalogueService,
               private route: ActivatedRoute,
@@ -89,5 +93,9 @@ export class ProposalsPage implements OnInit {
         this.cdr.detectChanges();
       })
     ).subscribe();
+  }
+
+  proposalClicked($event: Proposal): void {
+    this.proposalList.focusOnProposal($event);
   }
 }
