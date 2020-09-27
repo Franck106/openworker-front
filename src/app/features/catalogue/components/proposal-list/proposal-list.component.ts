@@ -1,5 +1,6 @@
-import { Component, OnInit, ChangeDetectionStrategy, Input } from '@angular/core';
+import {Component, OnInit, ChangeDetectionStrategy, Input, ViewChildren, QueryList} from '@angular/core';
 import { Proposal } from '../../services/models/proposal';
+import {ProposalItemComponent} from '../proposal-item/proposal-item.component';
 
 @Component({
   selector: 'app-proposal-list',
@@ -13,9 +14,19 @@ export class ProposalListComponent implements OnInit {
 
   @Input() showContactButtons: boolean;
 
+  @ViewChildren(ProposalItemComponent)
+  proposalItems: QueryList<ProposalItemComponent>;
+
   constructor() { }
 
   ngOnInit(): void {
   }
 
+  focusOnProposal($event: Proposal): void {
+    this.proposalItems.forEach(item => {
+      if (item.proposal.id === $event.id) {
+        item.focus();
+      }
+    });
+  }
 }

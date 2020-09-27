@@ -1,14 +1,24 @@
 import {
   Component,
   OnInit,
-  Input,
+  Input, ViewChild, EventEmitter, Output,
 } from '@angular/core';
-import { Proposal } from 'src/app/features/catalogue/services/models/proposal';
-import { User } from 'src/app/features/catalogue/services/models/user';
+import {Proposal} from 'src/app/features/catalogue/services/models/proposal';
+import {User} from 'src/app/features/catalogue/services/models/user';
+import {GoogleMap} from '@angular/google-maps';
 
 // tslint:disable-next-line:no-any
 function DBG(...args: any[]): void {
-  // console.log(...args);
+  console.log(...args);
+}
+
+interface Marker {
+  title: string;
+  position: google.maps.LatLngLiteral;
+  label: { color: string, text: string };
+  clickable?: boolean;
+  // tslint:disable-next-line:no-any
+  options?: any;
 }
 
 @Component({
@@ -18,49 +28,86 @@ function DBG(...args: any[]): void {
   // changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class GoogleMapComponent implements OnInit {
-  @Input() proposals: ReadonlyArray<Proposal> | null;
+  private proposalMarkerMap: Map<Marker, Proposal>;
+
+  @Input()
+  set proposals(proposals: ReadonlyArray<Proposal> | null) {
+    try {
+      if (proposals && this.map) {
+        this.markers = [];
+        this.bounds = new google.maps.LatLngBounds();
+        this.proposalMarkerMap = new Map<Marker, Proposal>();
+
+        for (const proposal of proposals) {
+          this.addMarker(proposal);
+        }
+
+        this.map.fitBounds(this.bounds);
+      }
+    } catch (e) {
+      setTimeout(() => this.proposals = proposals, 500);
+    }
+  }
+
   @Input() connectedUser: User;
+
+  @Output() proposalClicked = new EventEmitter<Proposal>();
+
+  @ViewChild(GoogleMap, {static: true})
+  map: GoogleMap;
+
   zoom = 12;
+
   center: google.maps.LatLngLiteral;
+
+  bounds = new google.maps.LatLngBounds();
+
   options: google.maps.MapOptions = {
     mapTypeId: 'roadmap',
-    zoomControl: false,
+    zoomControl: true,
     scrollwheel: false,
     disableDoubleClickZoom: false,
-    maxZoom: 15,
-    minZoom: 8,
+    maxZoom: 13
   };
 
-  markers: any[] = [];
+  markers: Marker[] = [];
 
-  constructor() {}
+  constructor() {
+    DBG('Create map component');
+  }
 
   ngOnInit(): void {
     navigator.geolocation.getCurrentPosition((position) => {
-      DBG(position);
+      // DBG(position);
       this.center = {
         lat: position.coords.latitude,
         lng: position.coords.longitude,
       };
     });
-    if (this.proposals) {
-      for (let proposal of this.proposals) {
-        this.addMarker(proposal);
-      }
+  }
+
+  addMarker(proposal: Proposal): void {
+    if (proposal.provider.geolocation) {
+      const location = JSON.parse(proposal.provider.geolocation);
+
+      const marker = {
+        position: location,
+        label: {
+          color: 'red',
+          text: proposal.name,
+        },
+        title: proposal.provider.lastName,
+      };
+
+      this.markers.push(marker);
+      this.proposalMarkerMap.set(marker, proposal);
+      this.bounds.extend(location);
     }
   }
 
-  addMarker(proposal: Proposal) {
-    const location = JSON.parse(proposal.provider.geolocation!);
-    DBG(proposal);
-    this.markers.push({
-      position: location,
-      label: {
-        color: 'red',
-        text: proposal.name,
-      },
-      title: proposal.provider.lastName,
-      options: { animation: google.maps.Animation.BOUNCE },
-    });
+  markerClicked($event: google.maps.MouseEvent, marker: Marker): void {
+    const proposal = this.proposalMarkerMap.get(marker);
+    this.proposalClicked.emit(proposal);
+    DBG('Proposal clicked : ', proposal);
   }
 }

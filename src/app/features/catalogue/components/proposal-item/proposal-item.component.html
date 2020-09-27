@@ -1,4 +1,5 @@
-<mat-card class="article">
+<mat-card class="article" [class.focused]="focused">
+  <div class="shadow-element" [class.on-top]="onTop"></div>
   <a [routerLink]="['/catalogue/user/', proposal.provider.id]" class="image-link">
     <img
       [src]="'./assets/images/' + (proposal.provider.image || 'default.png')"

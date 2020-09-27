@@ -1,30 +1,101 @@
-import {Component, OnInit} from '@angular/core';
+import {ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit, ViewChild} from '@angular/core';
 import {CatalogueService} from '../../services/catalogue.service';
 import {Proposal} from '../../services/models/proposal';
-import {Observable} from 'rxjs';
+import {Observable, of} from 'rxjs';
 import {ActivatedRoute} from '@angular/router';
-import {switchMap} from 'rxjs/operators';
 import {Category} from '../../services/models/category';
+import {User} from '../../services/models/user';
+import {tap} from 'rxjs/operators';
+import {ProposalListComponent} from '../../components/proposal-list/proposal-list.component';
+
+// tslint:disable-next-line:no-any
+function DBG(...args: any[]): void {
+  console.log(...args);
+}
 
 @Component({
   templateUrl: './proposals.page.html',
-  styleUrls: ['./proposals.page.css']
+  styleUrls: ['./proposals.page.css'],
+  changeDetection: ChangeDetectionStrategy.Default,
 })
 export class ProposalsPage implements OnInit {
 
   proposals$: Observable<Proposal[]>;
 
+  connectedUser: User;
+
+  numResults = 0;
+
+  private currentCategories: Category[] = [];
+
+  private currentSearchLocation: string | null;
+
+  private geocoder = new google.maps.Geocoder();
+
+  @ViewChild(ProposalListComponent)
+  proposalList: ProposalListComponent;
+
   constructor(private catalogue: CatalogueService,
-              private route: ActivatedRoute) {
+              private route: ActivatedRoute,
+              private cdr: ChangeDetectorRef) {
   }
 
   ngOnInit(): void {
-    this.proposals$ = this.catalogue.getSubcategories(parseInt(this.route.snapshot.paramMap.get('id') || '1', 10)).pipe(
-      switchMap(categories => this.catalogue.getProposalsForCategories(categories || []))
+    this.catalogue.getSubcategories(parseInt(this.route.snapshot.paramMap.get('id') || '1', 10)).subscribe(
+      (categories: Category[]) => {
+        this.currentCategories = categories;
+        this.queryProposals();
+      }
     );
   }
 
   handleCategoryChange(categories: Category[]): void {
-    this.proposals$ = this.catalogue.getProposalsForCategories(categories);
+    DBG('handle category change..');
+    this.currentCategories = categories;
+    this.queryProposals();
+  }
+
+  handleLocationChange($event: Event): void {
+    DBG('handle location change..');
+    const locationValue = ($event.target as HTMLInputElement)?.value;
+
+    if (locationValue == null || locationValue === '') {
+      this.currentSearchLocation = null;
+
+      this.queryProposals();
+    } else {
+      this.geocoder.geocode({address: locationValue}, (results) => {
+        if (results.length === 0) {
+          this.currentSearchLocation = null;
+
+          this.queryProposals();
+        } else {
+          const location = results[0].geometry.location;
+          this.currentSearchLocation = JSON.stringify(location);
+
+          DBG('new search location:', this.currentSearchLocation);
+
+          this.queryProposals();
+        }
+      });
+    }
+  }
+
+  private queryProposals(): void {
+    this.catalogue.searchProposals({
+      categories: this.currentCategories.map(c => c.id),
+      searchLocation: this.currentSearchLocation,
+    }).pipe(
+      tap((results) => {
+        DBG('Getting new search results');
+        this.numResults = results.length;
+        this.proposals$ = of(results);
+        this.cdr.detectChanges();
+      })
+    ).subscribe();
+  }
+
+  proposalClicked($event: Proposal): void {
+    this.proposalList.focusOnProposal($event);
   }
 }

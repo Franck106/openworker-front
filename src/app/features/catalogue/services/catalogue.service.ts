@@ -39,17 +39,31 @@ export class CatalogueService {
       );
   }
 
+  searchProposals(request: ProposalSearchRequest): Observable<Proposal[]> {
+    DBG('Search proposals', request);
+
+    return this.http
+      .post<ProposalSearchResponse>(
+        `${environment.apiUrl}/api/proposals/search`,
+        request,
+      )
+      .pipe(
+        tap((response) => DBG(response)),
+        pluck('results'),
+      );
+  }
+
   getCategories(): Observable<Category[]> {
     return this.http
       .get<Category[]>(`${environment.apiUrl}/api/categories`)
       .pipe(pluck('categories'));
   }
 
-  getSubcategories(categoryId: number): Observable<Category[] | undefined> {
+  getSubcategories(categoryId: number): Observable<Category[]> {
     return this.getCategories().pipe(
       map(
         (categories) =>
-          categories.find((category) => category.id === categoryId)?.categories,
+          categories.find((category) => category.id === categoryId)?.categories || [],
       ),
     );
   }
@@ -103,4 +117,9 @@ export class CatalogueService {
 interface ProposalSearchResponse {
   numResults: number;
   results: Proposal[];
+}
+
+interface ProposalSearchRequest {
+  categories: number[];
+  searchLocation: string | null;
 }
