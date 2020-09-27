@@ -1,18 +1,15 @@
 import { Component, OnInit } from '@angular/core';
-import {
-  FormBuilder,
-  Validators,
-} from '@angular/forms';
+import { FormBuilder, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
+import { ElasticSearchService } from 'src/app/core/elastic-search/elastic-search.service';
+import { ScrapperUser } from 'src/app/core/elastic-search/scrapper-user';
 import { SimpleAuthenticationService } from 'src/app/features/authentication/services/simple-authentication.service';
 import { CatalogueService } from '../../services/catalogue.service';
 import { Category } from '../../services/models/category';
 import { Proposal } from '../../services/models/proposal';
 
-// tslint:disable-next-line:no-any
-function DBG(...args: any[]): void { console.log(...args); }
 
 @Component({
   templateUrl: './add-proposal.page.html',
@@ -28,17 +25,20 @@ export class AddProposalPage implements OnInit {
   });
 
   categories$: Observable<Category[]>;
+  scrappedUsers$: Observable<ScrapperUser[]>;
 
   constructor(
     private catalogue: CatalogueService,
     private formBuilder: FormBuilder,
     private router: Router,
     private auth: SimpleAuthenticationService,
-    private snackbar: MatSnackBar
+    private snackbar: MatSnackBar,
+    private elasticService: ElasticSearchService,
   ) {}
 
   ngOnInit(): void {
     this.categories$ = this.catalogue.getCategories();
+    this.scrappedUsers$ = this.elasticService.getScrapperResults();
   }
 
   onSubmit(): void {
@@ -57,7 +57,7 @@ export class AddProposalPage implements OnInit {
       if (response == null) {
         console.error('Server error');
       } else {
-        DBG(response);
+        console.log(response);
         this.snackbar.open('Service ajouté !', 'Ok', { duration: 3000 });
         this.router.navigateByUrl('/user/activity');
       }

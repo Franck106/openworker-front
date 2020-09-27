@@ -4,13 +4,13 @@ import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
-import { MatPaginatorModule} from '@angular/material/paginator';
-import { MatIconModule} from '@angular/material/icon';
-import { MatFormFieldModule} from '@angular/material/form-field';
-import { MatSelectModule} from '@angular/material/select';
-import { MatInputModule} from '@angular/material/input';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatIconModule } from '@angular/material/icon';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatSelectModule } from '@angular/material/select';
+import { MatInputModule } from '@angular/material/input';
 import { ReactiveFormsModule } from '@angular/forms';
-import {MatBadgeModule} from '@angular/material/badge';
+import { MatBadgeModule } from '@angular/material/badge';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 import { CatalogueRoutingModule } from './catalogue-routing.module';
@@ -24,8 +24,8 @@ import { AddProposalPage } from './pages/add-proposal/add-proposal.page';
 import { FeedbackPage } from './pages/feedback/feedback.page';
 import { GoogleMapModule } from '../../ui/google-map/google-map.module';
 import { IntroductionModule } from '../../ui/introduction/introduction.module';
-import {SharedModule} from '../../shared/shared.module';
-
+import { SharedModule } from '../../shared/shared.module';
+import { ScrapperModule } from '../scrapper/scrapper.module';
 
 @NgModule({
   declarations: [
@@ -36,7 +36,7 @@ import {SharedModule} from '../../shared/shared.module';
     CategoryListComponent,
     UserProfilePage,
     AddProposalPage,
-    FeedbackPage
+    FeedbackPage,
   ],
   imports: [
     CommonModule,
@@ -55,8 +55,9 @@ import {SharedModule} from '../../shared/shared.module';
     IntroductionModule,
     MatBadgeModule,
     MatSnackBarModule,
-    SharedModule
+    SharedModule,
+    ScrapperModule,
   ],
-  exports: [CategoryListComponent, ProposalListComponent]
+  exports: [CategoryListComponent, ProposalListComponent],
 })
-export class CatalogueModule { }
+export class CatalogueModule {}
