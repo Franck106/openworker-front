@@ -6,6 +6,30 @@
   height: 100%;
 }
 
+:host {
+    scroll-margin: 10px;
+}
+
+.shadow-element {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    box-shadow: 0 0 0 8000px #00000040;
+    opacity: 0;
+    transition: opacity 400ms;
+    z-index: 0;
+}
+
+.mat-card.focused .shadow-element {
+    opacity: 1;
+}
+
+.on-top {
+    z-index: 100;
+}
+
 .image-link {
   align-self: center;
   display: flex;

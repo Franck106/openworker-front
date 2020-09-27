@@ -13,7 +13,8 @@
         <p>{{numResults}} annonce(s) correspondent à vos critères.</p>
         <app-google-map
             [proposals]="proposals$ | async"
-            [connectedUser]="connectedUser">
+            [connectedUser]="connectedUser"
+            (proposalClicked)="proposalClicked($event)">
         </app-google-map>
     </div>
     <app-proposal-list *ngIf="proposals$ | async as proposals; else proposalsLoading"
