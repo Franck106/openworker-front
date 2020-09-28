@@ -31,6 +31,8 @@ export class HomePage implements OnInit {
 
   proposals: Proposal[] = [];
 
+  recentProposals: Proposal[];
+
   constructor(
     private formBuilder: FormBuilder,
     private catalogue: CatalogueService,
@@ -44,6 +46,15 @@ export class HomePage implements OnInit {
       .pipe(tap((categories) => DBG(categories)));
     this.proposals$ = this.catalogue.getProposals();
     this.connectedUser = this.auth.getConnectedUser();
+
+    // Recent proposals
+    this.catalogue.searchProposals({
+      categories: null,
+      searchLocation: null,
+      maxResults: 3,
+    }).subscribe((results) => {
+      this.recentProposals = results;
+    });
   }
 
   onSubmit() {

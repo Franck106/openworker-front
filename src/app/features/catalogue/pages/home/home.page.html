@@ -36,6 +36,13 @@
     [category]="category"
   ></app-category-list>
 </div>
+
+<h2>Les annonces récentes</h2>
+<app-proposal-list
+  [showContactButtons]="true"
+  [proposals]="recentProposals">
+</app-proposal-list>
+
 <div id="map">
   <app-google-map
     *ngIf="proposals$ | async as proposals"
