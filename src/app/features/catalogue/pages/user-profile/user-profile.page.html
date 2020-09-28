@@ -23,7 +23,7 @@
     </div>
 
     <div class="chat-box-section" *ngIf="myUserId != userId">
-        <h4 *ngIf="provider | async as prov">Contacter {{prov?.firstName}} {{prov?.lastName}}</h4>
+        <h2 *ngIf="provider | async as prov">Contacter {{prov?.firstName}} {{prov?.lastName}}</h2>
         <div *ngIf="shouldShowChatBox; else chatBoxHidden" class="mb-1">
             <div #chatBox class="chat-box-container"></div>
         </div>
