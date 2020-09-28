@@ -77,13 +77,10 @@ export class GoogleMapComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    navigator.geolocation.getCurrentPosition((position) => {
-      // DBG(position);
-      this.center = {
-        lat: 48.860528,
-        lng: 2.340351,
-      };
-    });
+    this.center = {
+      lat: 48.860528,
+      lng: 2.340351,
+    };
   }
 
   addMarker(proposal: Proposal): void {
