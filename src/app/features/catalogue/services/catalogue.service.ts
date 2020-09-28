@@ -120,6 +120,7 @@ interface ProposalSearchResponse {
 }
 
 interface ProposalSearchRequest {
-  categories: number[];
+  categories: number[] | null;
   searchLocation: string | null;
+  maxResults?: number;
 }
