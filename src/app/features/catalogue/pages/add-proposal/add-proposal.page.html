@@ -15,6 +15,7 @@
         </mat-optgroup>
       </mat-select>
     </mat-form-field>
+
     <mat-form-field>
       <input
         formControlName="name"
@@ -34,6 +35,12 @@
         placeholder="Décrivez-vous et votre service en quelques mots"
       ></textarea>
     </mat-form-field>
+    <div *ngIf="form.value.category.id == 53">
+      <app-scrapper
+        *ngIf="scrappedUsers$ |async as scrappedUsers"
+        [users]="scrappedUsers"
+      ></app-scrapper>
+    </div>
     <mat-form-field>
       <mat-label>Prix estimé</mat-label>
       <input
