@@ -30,18 +30,22 @@ export class UserProfilePage implements OnInit {
       const chatBoxModel = createChatBox(elem.nativeElement, this.myUserId.toString(), this.userId.toString());
 
       chatBoxModel.listeners.push({
-        onmessagesent: () => this.catalogue.addPrestation(this.proposalId, this.myUserId)
-          .subscribe(
-          () => {
-            this.messageUnderChat = 'Votre demande a bien été envoyée !';
-            this.cdr.detectChanges();
+        onmessagesent: () => {
+          if (this.prefilledMessage) {
+            this.catalogue.addPrestation(this.proposalId, this.myUserId)
+              .subscribe(
+                () => {
+                  this.messageUnderChat = 'Votre demande a bien été envoyée !';
+                  this.cdr.detectChanges();
+                }
+              );
           }
-        ),
+        },
       });
 
       const textArea = document.querySelector('.scb-input-area textarea');
 
-      if (textArea) {
+      if (textArea && this.prefilledMessage) {
         textArea.textContent = this.prefilledMessage;
       }
     }
@@ -70,15 +74,6 @@ export class UserProfilePage implements OnInit {
         withLatestFrom(catalogue.getProposalById(this.proposalId))
       ).subscribe(([provider, proposal]) => {
         this.prefilledMessage = `Bonjour ${provider?.firstName}, je suis intéressé(e) par contre annonce "${proposal.name}" (#${proposal.id}).`;
-
-        // if (this.chatBox != null) {
-        //   const textArea = document.querySelector('.scb-input-area textarea');
-
-        //   if (textArea) {
-        //     textArea.textContent = this.prefilledMessage;
-        //   }
-        // }
-
         this.messageUnderChat = `En envoyant ce message, une demande sera enregistrée pour l'annonce #${proposal.id}.`;
       });
     }
