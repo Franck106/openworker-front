@@ -18,8 +18,8 @@ export class ActivityService {
 
   public getUserActivity(userId:  number | undefined): Observable<UserActivity> {
     userId = this.authService.getConnectedUser().id;
-    console.log("https://earrj8sjp2.execute-api.eu-west-3.amazonaws.com/dev/" + (userId));
-    return this.http.get<any>("https://earrj8sjp2.execute-api.eu-west-3.amazonaws.com/dev/" + (userId)).pipe(
+    console.log(`${environment.orchestrateur}` + (userId));
+    return this.http.get<any>(`${environment.orchestrateur}` + (userId)).pipe(
      map(
       response => {
         const userProposals = JSON.parse(unescape(response.userProposals));
