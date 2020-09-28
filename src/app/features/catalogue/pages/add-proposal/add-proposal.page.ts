@@ -42,6 +42,10 @@ export class AddProposalPage implements OnInit {
   }
 
   onSubmit(): void {
+    if (this.form.invalid) {
+      return;
+    }
+
     const loading = this.snackbar.open('Enregistrement en cours...');
     const proposal: Proposal = {
       name: this.form.value.name,
@@ -52,6 +56,7 @@ export class AddProposalPage implements OnInit {
       maxDistance: this.form.value.maxDistance,
       date: new Date(),
     };
+
     this.catalogue.addProposal(proposal).subscribe((response) => {
       loading.dismiss();
       if (response == null) {
