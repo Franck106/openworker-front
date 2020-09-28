@@ -1,5 +1,6 @@
 article {
     margin: 10px;
+    position: relative;
 }
 
 :host {
@@ -17,6 +18,10 @@ article {
     transition: opacity 400ms;
     z-index: 0;
     pointer-events: none;
+}
+
+.on-top {
+    z-index: 100;
 }
 
 article.focused .shadow-element {
