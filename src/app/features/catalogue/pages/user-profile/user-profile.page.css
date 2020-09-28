@@ -86,3 +86,11 @@
     z-index: 100;
     font-weight: bold;
 }
+
+.material-icons.color_grey {
+    color: #bccbda;
+}
+
+.user-name {
+    color: #62066e;
+}

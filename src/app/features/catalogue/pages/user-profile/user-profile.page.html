@@ -3,7 +3,7 @@
         <div class="pro-badge" *ngIf="user.premium">PRO</div>
         <div>
             <img [src]="'./assets/images/' + (user.image || 'default.jpg')" class="profile-picture" alt="">
-            <div class="mt-3 card-title">{{user.firstName}} {{user.lastName}}</div>
+            <div class="mt-3 card-title user-name">{{user.firstName}} {{user.lastName}}</div>
         </div>
         <div class="user-city">
             <mat-icon
