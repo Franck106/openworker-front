@@ -1,13 +1,25 @@
 <div id="main" *ngIf="(provider | async) as user">
-    <div class="user-card {{user.premium ? 'premium-card' : ''}}" style="width: 30rem;">
+    <div class="user-card {{user.premium ? 'premium-card' : ''}}">
+        <div class="pro-badge" *ngIf="user.premium">PRO</div>
         <div>
             <img [src]="'./assets/images/' + (user.image || 'default.jpg')" class="profile-picture" alt="">
-            <h5 class="mt-3 card-title">{{user.firstName}} {{user.lastName}}</h5>
-            <p class="card-text">{{user.postCode}} {{user.city}}</p>
+            <div class="mt-3 card-title">{{user.firstName}} {{user.lastName}}</div>
+        </div>
+        <div class="user-city">
+            <mat-icon
+                    class="material-icons color_grey"
+                    aria-hidden="false"
+                    aria-label="city">home</mat-icon>
+            <strong>{{ user.city }}</strong>
         </div>
         <span class="ratings-container">Note des utilisateurs
             <app-one-star-rating [ratings]="user.globalRating"></app-one-star-rating>
         </span>
+        <div *ngIf="userActivity | async as activity" class="mt-4">
+            <div>Annonces actives: {{activity.userProposals.length}}</div>
+            <div>Services rendus: {{activity.userPrestations.length}}</div>
+            <div>Services demandés: {{activity.userDemands.length}}</div>
+        </div>
     </div>
 
     <div class="chat-box-section" *ngIf="myUserId != userId">
