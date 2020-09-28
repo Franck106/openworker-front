@@ -5,6 +5,7 @@ import {ActivityPage} from './pages/activity/activity.page';
 import {UserRoutingModule} from './user-routing.module';
 import {CatalogueModule} from '../catalogue/catalogue.module';
 import {SharedModule} from '../../shared/shared.module';
+import {MatToolbarModule} from '@angular/material/toolbar';
 
 @NgModule({
   declarations: [
@@ -16,6 +17,7 @@ import {SharedModule} from '../../shared/shared.module';
     UserRoutingModule,
     CatalogueModule,
     SharedModule,
+    MatToolbarModule,
   ]
 })
 export class UserModule { }

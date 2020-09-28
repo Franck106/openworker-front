@@ -1,13 +1,15 @@
+<mat-toolbar>
+    <span>Mes annonces</span>
+</mat-toolbar>
 <div class="text-center mt-4" *ngIf="activity$ | async as activity">
-    <h3>Mes annonces</h3>
     <div id="flexCategories" class="d-flex flex-row justify-content-center">
         <app-proposal-list [proposals]="activity.userProposals">
         </app-proposal-list>
     </div>
 
-    <hr class="mt-2 mb-3">
-
-    <h3>Demandes reçues</h3>
+    <mat-toolbar>
+        <span>Demandes reçues</span>
+    </mat-toolbar>
     <div id="myDemands" class="container mt-3 mb-4">
         <div class="row table-header">
             <div class="col-sm">Statut</div>
@@ -38,9 +40,9 @@
         </div>
     </div>
 
-    <hr class="mt-2 mb-3">
-
-    <h3>Demandes envoyées</h3>
+    <mat-toolbar>
+        <span>Demandes envoyées</span>
+    </mat-toolbar>
     <div id="myPrestations" class="container mt-3 mb-4">
         <div class="row table-header">
             <div class="col-sm">Statut</div>
