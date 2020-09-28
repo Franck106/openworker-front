@@ -22,7 +22,8 @@
         <div *ngFor="let dem of activity.userDemands" class="row">
             <div class="col-sm">{{getStatus(dem)}}</div>
             <div class="col-sm">{{dem.proposal.name}}</div>
-            <div class="col-sm">{{dem.customer.firstName}} {{dem.customer.lastName}}</div>
+            <div class="col-sm">
+                <a [routerLink]="['/catalogue/user', dem.customer.id]">{{dem.customer.firstName}} {{dem.customer.lastName}}</a></div>
             <div class="col-sm">{{formatDate(dem.startDate)}}</div>
             <div class="col-sm">{{formatDate(dem.endDate)}}</div>
             <div class="col-sm">{{dem.proposal.price}} €</div>
@@ -54,7 +55,8 @@
         <div *ngFor="let prestation of activity.userPrestations" class="row">
             <div class="col-sm">{{getStatus(prestation)}}</div>
             <div class="col-sm">{{prestation.proposal.name}}</div>
-            <div class="col-sm">{{prestation.proposal.provider.firstName}} {{prestation.proposal.provider.lastName}}</div>
+            <div class="col-sm">
+                <a [routerLink]="['/catalogue/user', prestation.proposal.provider.id]">{{prestation.proposal.provider.firstName}} {{prestation.proposal.provider.lastName}}</a></div>
             <div class="col-sm">{{formatDate(prestation.startDate)}}</div>
             <div class="col-sm">{{formatDate(prestation.endDate)}}</div>
             <div class="col-sm">{{prestation.proposal.price}} €</div>
