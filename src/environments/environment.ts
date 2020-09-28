@@ -8,7 +8,8 @@ export const environment = {
   apiUrl: 'http://localhost:5000',
   orchestraUrl: 'http://localhost:8585',
   elasticUrl: 'http://localhost:9200/proposals/_search?q=',
-  orchestrateur: 'https://earrj8sjp2.execute-api.eu-west-3.amazonaws.com/dev/'
+  orchestrateur: 'https://earrj8sjp2.execute-api.eu-west-3.amazonaws.com/dev/',
+  elasticScrapperUrl: 'http://localhost:9200/scrapp/_search',
 };
 
 /*

@@ -6,9 +6,8 @@ import { Proposal } from 'src/app/features/catalogue/services/models/proposal';
 import { environment } from 'src/environments/environment';
 import { ElasticMapper } from './elastic-mapper';
 import { ElasticResponse } from './elastic-response';
+import { ScrapperUser } from './scrapper-user';
 
-// tslint:disable-next-line:no-any
-function DBG(...args: any[]): void { console.log(...args); }
 
 @Injectable({
   providedIn: 'root',
@@ -18,16 +17,34 @@ export class ElasticSearchService {
 
   getElasticResults(text: string): Observable<Proposal[]> {
     const headers = new HttpHeaders().set('Content-Type', 'application/json');
-    DBG('service...');
+    console.log('service...');
     return this.http
       .get<ElasticResponse>(`${environment.elasticUrl}` + text, { headers })
       .pipe(
-        tap((data) => DBG(data)),
+        tap((data) => console.log(data)),
         pluck('hits'),
         pluck('hits'),
         map((data) =>
           data.map(({ _source }) =>
             this.elasticMapper.convertElasticResponseToProposal(_source),
+          ),
+        ),
+      );
+  }
+
+  getScrapperResults(): Observable<ScrapperUser[]> {
+    const headers = new HttpHeaders().set('Content-Type', 'application/json');
+    console.log('service...');
+    return this.http
+      .get<any>(`${environment.elasticScrapperUrl}`, { headers })
+      .pipe(
+        tap((data) => console.log(data)),
+        pluck('hits'),
+        pluck('hits'),
+        map((data) =>
+          data.map((elt: ScrapperUser) =>
+            {const user: ScrapperUser = elt;
+            return user;}
           ),
         ),
       );
