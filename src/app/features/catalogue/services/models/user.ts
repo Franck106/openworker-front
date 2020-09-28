@@ -18,5 +18,5 @@ export interface User {
     login?: string;
     password?: string;
     role?: string;
-    geolocation?: string;
+    geolocation?: any;
 }

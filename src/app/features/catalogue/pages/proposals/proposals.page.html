@@ -14,6 +14,7 @@
         <app-google-map
             [proposals]="proposals$ | async"
             [connectedUser]="connectedUser"
+            [fitToBound]="true"
             (proposalClicked)="proposalClicked($event)">
         </app-google-map>
     </div>

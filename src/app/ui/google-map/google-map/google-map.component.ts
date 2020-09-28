@@ -1,11 +1,14 @@
 import {
   Component,
   OnInit,
-  Input, ViewChild, EventEmitter, Output,
+  Input,
+  ViewChild,
+  EventEmitter,
+  Output,
 } from '@angular/core';
-import {Proposal} from 'src/app/features/catalogue/services/models/proposal';
-import {User} from 'src/app/features/catalogue/services/models/user';
-import {GoogleMap} from '@angular/google-maps';
+import { Proposal } from 'src/app/features/catalogue/services/models/proposal';
+import { User } from 'src/app/features/catalogue/services/models/user';
+import { GoogleMap } from '@angular/google-maps';
 
 // tslint:disable-next-line:no-any
 function DBG(...args: any[]): void {
@@ -14,8 +17,8 @@ function DBG(...args: any[]): void {
 
 interface Marker {
   title: string;
-  position: google.maps.LatLngLiteral;
-  label: { color: string, text: string };
+  position: any;
+  label: { color: string; text: string };
   clickable?: boolean;
   // tslint:disable-next-line:no-any
   options?: any;
@@ -41,19 +44,21 @@ export class GoogleMapComponent implements OnInit {
         for (const proposal of proposals) {
           this.addMarker(proposal);
         }
-
-        this.map.fitBounds(this.bounds);
+        if (this.fitToBound) {
+          this.map.fitBounds(this.bounds);
+        }
       }
     } catch (e) {
-      setTimeout(() => this.proposals = proposals, 500);
+      setTimeout(() => (this.proposals = proposals), 500);
     }
   }
 
   @Input() connectedUser: User;
+  @Input() fitToBound: boolean = false;
 
   @Output() proposalClicked = new EventEmitter<Proposal>();
 
-  @ViewChild(GoogleMap, {static: true})
+  @ViewChild(GoogleMap, { static: true })
   map: GoogleMap;
 
   zoom = 12;
@@ -67,7 +72,7 @@ export class GoogleMapComponent implements OnInit {
     zoomControl: true,
     scrollwheel: false,
     disableDoubleClickZoom: false,
-    maxZoom: 13
+    maxZoom: 13,
   };
 
   markers: Marker[] = [];
@@ -85,7 +90,8 @@ export class GoogleMapComponent implements OnInit {
 
   addMarker(proposal: Proposal): void {
     if (proposal.provider.geolocation) {
-      const location = JSON.parse(proposal.provider.geolocation);
+      console.log('addMarker===================');
+      const location = proposal.provider.geolocation;
 
       const marker = {
         position: location,

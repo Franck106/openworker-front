@@ -44,7 +44,9 @@ export class HomePage implements OnInit {
     this.categories$ = this.catalogue
       .getCategories()
       .pipe(tap((categories) => DBG(categories)));
-    this.proposals$ = this.catalogue.getProposals();
+    this.proposals$ = this.catalogue.getProposals().pipe(
+      tap((proposals) => console.log(proposals))
+    );
     this.connectedUser = this.auth.getConnectedUser();
 
     // Recent proposals
