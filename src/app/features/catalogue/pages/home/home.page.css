@@ -1,72 +1,77 @@
-#main{
-    display: flex;
-    flex-direction: column;
-    padding-bottom: 40px;
-    margin: 40px;
-    justify-content: center;
+#main {
+  display: flex;
+  flex-direction: column;
+  padding-bottom: 40px;
+  margin: 40px;
+  justify-content: center;
 }
 
-#cards{
-    display: flex;
-    flex-wrap: wrap;
-    flex-direction: row;
-    align-self: center;
-    padding: 20px;
-    margin: 40px;
+#cards {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  align-self: center;
+  padding: 20px;
+  margin: 40px;
 }
 
-#titre{
-    margin: 20px auto 20px auto;
-    font: bold;
-    color: black;
-    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Verdana, sans-serif;
-    text-shadow: bisque;
-    text-align: center;
+#titre {
+  margin: 20px auto 20px auto;
+  font: bold;
+  color: black;
+  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande',
+    'Lucida Sans Unicode', Verdana, sans-serif;
+  text-shadow: bisque;
+  text-align: center;
 }
 
-
-
-#card{
-    padding : 10px;
-    margin: 20px;
-    border: 3px solid;
-    text-align: center;
-
+#card {
+  padding: 10px;
+  margin: 20px;
+  border: 3px solid;
+  text-align: center;
 }
 
-.card-title{
-    font-size: 20px;
-    text-align: center;
+.card-title {
+  font-size: 20px;
+  text-align: center;
 }
 
 @media all {
-    #category-list {
-        display: flex;
-        flex-wrap: wrap;
-    }
-    #category-list > app-category-list {
-        flex: calc(100% / 3);
-    }
+  #category-list {
+    margin-top: 20px;
+    display: grid;
+    flex-wrap: wrap;
+    grid-template-columns: 1fr 1fr 1fr;
+    justify-content: center;
+    column-gap: 20px;
+    row-gap: 20px;
+  }
+}
+@media all and (max-width: 700px) {
+  #category-list {
+    margin-top: 20px;
+    display: grid;
+    flex-wrap: nowrap;
+    grid-template-columns: 1fr 1fr;
+    column-gap: 20px;
+    row-gap: 20px;
+  }
 }
 
 @media all and (max-width: 459px) {
-    #category-list {
-        flex-direction: column;
-        flex-wrap: nowrap;
-    }
-    #category-list > app-category-list {
-        flex: 100%;
-    }
+  #category-list {
+    margin-top: 20px;
+    display: grid;
+    grid-template-columns: 100%;
+    column-gap: 0;
+  }
 }
 
 app-google-map {
-    margin: auto;
+  margin: auto;
 }
-
-
-
 
 #elastic-results {
-    margin-top: 20px;
+  margin-top: 20px;
 }
-

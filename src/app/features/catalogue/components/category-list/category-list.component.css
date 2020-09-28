@@ -1,8 +1,18 @@
-article {
-    margin: 20px;
+.article {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  height: 100%;
 }
 
-article img {
-    height: 300px;
-    width: 400px;
+.image-link {
+  align-self: center;
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  padding: 5%;
+}
+
+.image {
+  width: 100%;
 }
