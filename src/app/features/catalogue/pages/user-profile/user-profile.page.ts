@@ -6,6 +6,8 @@ import {Observable} from 'rxjs';
 import {SimpleAuthenticationService} from '../../../authentication/services/simple-authentication.service';
 import {take, withLatestFrom} from 'rxjs/operators';
 import {ChatBoxModel} from '../../../../shared/chat-box-model';
+import {ActivityService} from '../../../user/services/activity.service';
+import {UserActivity} from '../../services/models/user-activity';
 
 declare var createChatBox: (rootElement: HTMLElement | null, sourceId: string, targetId: string) => ChatBoxModel;
 
@@ -22,11 +24,11 @@ export class UserProfilePage implements OnInit {
   prefilledMessage: string;
   messageUnderChat: string;
   proposalId: number;
+  userActivity: Observable<UserActivity>;
 
   @ViewChild('chatBox')
   set chatBox(elem: ElementRef) {
     if (!! elem) {
-      this.myUserId = this.auth.getConnectedUser().id || -1;
       const chatBoxModel = createChatBox(elem.nativeElement, this.myUserId.toString(), this.userId.toString());
 
       chatBoxModel.listeners.push({
@@ -56,7 +58,10 @@ export class UserProfilePage implements OnInit {
   constructor(private catalogue: CatalogueService,
               private route: ActivatedRoute,
               private auth: SimpleAuthenticationService,
-              private cdr: ChangeDetectorRef) {
+              private cdr: ChangeDetectorRef,
+              private activityService: ActivityService) {
+
+    this.myUserId = this.auth.getConnectedUser().id || -1;
 
     this.userId = parseInt(this.route.snapshot.paramMap.get('id') || '1', 10);
     this.provider = this.catalogue.getUserById(this.userId);
@@ -77,6 +82,8 @@ export class UserProfilePage implements OnInit {
         this.messageUnderChat = `En envoyant ce message, une demande sera enregistrée pour l'annonce #${proposal.id}.`;
       });
     }
+
+    this.userActivity = this.activityService.getUserActivity(this.myUserId);
   }
 
   ngOnInit(): void {
