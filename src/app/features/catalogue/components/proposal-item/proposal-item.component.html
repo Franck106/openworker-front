@@ -1,5 +1,5 @@
 <article [class.focused]="focused">
-  <div class="shadow-element"></div>
+  <div class="shadow-element" [class.on-top]="onTop"></div>
   <div class="pro-badge" *ngIf="proposal.provider.premium">PRO</div>
   <div class="card" [class.premium-user]="proposal.provider.premium">
     <a [routerLink]="['/catalogue/user', proposal.provider.id]">
