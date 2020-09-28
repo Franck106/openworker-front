@@ -11,6 +11,8 @@ import {UserActivity} from '../../services/models/user-activity';
 
 declare var createChatBox: (rootElement: HTMLElement | null, sourceId: string, targetId: string) => ChatBoxModel;
 
+// tslint:disable:no-non-null-assertion
+
 @Component({
   templateUrl: './user-profile.page.html',
   styleUrls: ['./user-profile.page.css'],
@@ -19,7 +21,7 @@ declare var createChatBox: (rootElement: HTMLElement | null, sourceId: string, t
 export class UserProfilePage implements OnInit {
 
   userId: number;
-  myUserId: number;
+  myUserId?: number;
   shouldShowChatBox: boolean;
   prefilledMessage: string;
   messageUnderChat: string;
@@ -29,12 +31,12 @@ export class UserProfilePage implements OnInit {
   @ViewChild('chatBox')
   set chatBox(elem: ElementRef) {
     if (!! elem) {
-      const chatBoxModel = createChatBox(elem.nativeElement, this.myUserId.toString(), this.userId.toString());
+      const chatBoxModel = createChatBox(elem.nativeElement, this.myUserId!.toString(), this.userId.toString());
 
       chatBoxModel.listeners.push({
         onmessagesent: () => {
           if (this.prefilledMessage) {
-            this.catalogue.addPrestation(this.proposalId, this.myUserId)
+            this.catalogue.addPrestation(this.proposalId, this.myUserId!)
               .subscribe(
                 () => {
                   this.messageUnderChat = 'Votre demande a bien été envoyée !';
@@ -61,7 +63,7 @@ export class UserProfilePage implements OnInit {
               private cdr: ChangeDetectorRef,
               private activityService: ActivityService) {
 
-    this.myUserId = this.auth.getConnectedUser().id || -1;
+    this.myUserId = this.auth.getConnectedUser()?.id;
 
     this.userId = parseInt(this.route.snapshot.paramMap.get('id') || '1', 10);
     this.provider = this.catalogue.getUserById(this.userId);
@@ -83,7 +85,9 @@ export class UserProfilePage implements OnInit {
       });
     }
 
-    this.userActivity = this.activityService.getUserActivity(this.myUserId);
+    if (this.myUserId! > 0) {
+      this.userActivity = this.activityService.getUserActivity(this.myUserId);
+    }
   }
 
   ngOnInit(): void {
