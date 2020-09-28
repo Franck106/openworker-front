@@ -50,6 +50,8 @@ article.focused .shadow-element {
 .profile-picture {
     width: 100%;
     margin: 0;
+    max-height: 250px;
+    object-fit: cover;
 }
 
 .card {
