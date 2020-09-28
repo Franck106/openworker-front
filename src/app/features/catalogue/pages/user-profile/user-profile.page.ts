@@ -80,7 +80,7 @@ export class UserProfilePage implements OnInit {
         take(1),
         withLatestFrom(catalogue.getProposalById(this.proposalId))
       ).subscribe(([provider, proposal]) => {
-        this.prefilledMessage = `Bonjour ${provider?.firstName}, je suis intéressé(e) par contre annonce "${proposal.name}" (#${proposal.id}).`;
+        this.prefilledMessage = `Bonjour ${provider?.firstName}, je suis intéressé(e) par votre annonce "${proposal.name}" (#${proposal.id}).`;
         this.messageUnderChat = `En envoyant ce message, une demande sera enregistrée pour l'annonce #${proposal.id}.`;
       });
     }
