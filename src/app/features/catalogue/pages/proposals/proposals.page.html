@@ -1,30 +1,37 @@
 <div>
-    <mat-toolbar>
-        <span>Explorer les services</span>
-    </mat-toolbar>
-    <div class="filters form-group">
-        <h2>Je recherche...</h2>
-        <app-category-selector (categoryChanged)="handleCategoryChange($event)"></app-category-selector>
+  <mat-toolbar>
+    <span>Explorer les services</span>
+  </mat-toolbar>
+  <div class="filters form-group">
+    <h2>Je recherche...</h2>
+    <app-category-selector
+      (categoryChanged)="handleCategoryChange($event)"
+    ></app-category-selector>
 
-        <h2>Du côté de...</h2>
-        <input class="form-control location-input"
-               placeholder="Entrez une adresse, une ville..."
-                (change)="handleLocationChange($event)"/>
-        <p>{{numResults}} annonce(s) correspondent à vos critères.</p>
-        <app-google-map
-            [proposals]="proposals$ | async"
-            [connectedUser]="connectedUser"
-            [fitToBound]="true"
-            (proposalClicked)="proposalClicked($event)">
-        </app-google-map>
+    <h2>Du côté de...</h2>
+    <input
+      class="form-control location-input"
+      placeholder="Entrez une adresse, une ville..."
+      (change)="handleLocationChange($event)"
+    />
+    <p>{{numResults}} annonce(s) correspondent à vos critères.</p>
+    <app-google-map
+      [proposals]="proposals$ | async"
+      [connectedUser]="connectedUser"
+      [fitToBound]="true"
+      (proposalClicked)="proposalClicked($event)"
+    >
+    </app-google-map>
+  </div>
+  <app-proposal-list
+    *ngIf="proposals$ | async as proposals; else proposalsLoading"
+    [proposals]="proposals"
+    [showContactButtons]="true"
+  >
+  </app-proposal-list>
+  <ng-template #proposalsLoading>
+    <div class="center">
+      <mat-progress-spinner mode="indeterminate"></mat-progress-spinner>
     </div>
-    <app-proposal-list *ngIf="proposals$ | async as proposals; else proposalsLoading"
-        [proposals]="proposals"
-        [showContactButtons]="true">
-    </app-proposal-list>
-    <ng-template #proposalsLoading>
-        <div class="center">
-            <mat-progress-spinner mode="indeterminate"></mat-progress-spinner>
-        </div>
-    </ng-template>
+  </ng-template>
 </div>
