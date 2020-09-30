@@ -9,6 +9,9 @@
             <li class="nav-item">
                 <span class="nav-link" routerLink="/catalogue/proposals">Explorer les services</span>
             </li>
+            <li class="nav-item">
+                <a class="nav-link" routerLink="http://127.0.0.1:5601">admin</a>
+            </li>
             <ng-container *ngIf="currentUser$ | async">
                 <li class="nav-item">
                     <span class="nav-link" routerLink="/user/activity">Mon activité</span>
